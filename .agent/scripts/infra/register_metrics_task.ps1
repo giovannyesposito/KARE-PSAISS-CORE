@@ -1,4 +1,4 @@
-#Requires -Version 5.1
+﻿#Requires -Version 5.1
 <#
 .SYNOPSIS
     Registra a Task Agendada "KARE Telemetry Export" no Windows Task Scheduler.

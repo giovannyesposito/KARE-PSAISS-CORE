@@ -1,0 +1,8 @@
+# Artefatos locais de execução — nunca devem ir para o pacote publicado
+# (o "files" do package.json já restringe o que é elegível, mas isso não
+# filtra sozinho conteúdo gerado localmente dentro dos diretórios incluídos).
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+.DS_Store
+Thumbs.db

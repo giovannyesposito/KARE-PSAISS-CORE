@@ -1,4 +1,4 @@
-# install_hooks.ps1 — Instala os git hooks do KARE no repositório local
+﻿# install_hooks.ps1 — Instala os git hooks do KARE no repositório local
 # Execute UMA VEZ após cada clone: .agent/scripts/infra/install_hooks.ps1
 #
 # O que instala:

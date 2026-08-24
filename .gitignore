@@ -9,6 +9,10 @@
 __pycache__/
 *.pyc
 
+# Node (instalador npx — tools/installer/)
+node_modules/
+*.tgz
+
 # RAG — bases geradas/acumuladas localmente, nunca versionar
 # (kare_perene_rag.db FICA versionado: é pequeno, genérico, reproduzível a
 # partir de seed/kare-universal.json — ver PRIVACY.md)

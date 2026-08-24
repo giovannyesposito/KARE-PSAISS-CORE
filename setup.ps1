@@ -1,4 +1,4 @@
-#Requires -Version 5.1
+﻿#Requires -Version 5.1
 <#
 .SYNOPSIS
     KARE-SPEC — Setup & Onboarding Windows
@@ -69,10 +69,10 @@ function Write-INFO([string]$text) {
 $WORKSPACE   = $PSScriptRoot
 $VSCODE_DIR  = Join-Path $WORKSPACE ".vscode"
 $AGENT_DIR   = Join-Path $WORKSPACE ".agent"
-$CONFIG_DIR  = Join-Path $WORKSPACE ".config" ".venv"
-$HOOKS_DIR   = Join-Path $WORKSPACE ".git" "hooks"
+$CONFIG_DIR  = Join-Path $WORKSPACE ".config\.venv"
+$HOOKS_DIR   = Join-Path $WORKSPACE ".git\hooks"
 $REQ_FILE    = Join-Path $WORKSPACE "requirements.txt"
-$CREDS_SCRIPT= Join-Path $WORKSPACE ".agent" "scripts" "infra" "kare_credentials.py"
+$CREDS_SCRIPT= Join-Path $WORKSPACE ".agent\scripts\infra\kare_credentials.py"
 $MIN_PYTHON  = [version]"3.10"
 
 $REQUIRED_VSCODE_EXTENSIONS = @(
@@ -202,7 +202,7 @@ try {
 # ──────────────────────────────────────── PASSO 3: GIT HOOKS ─────────────────
 Write-Header "PASSO 3 — Configurando Git Hooks (Segurança)"
 
-$hookSrc  = Join-Path $AGENT_DIR "scripts" "hooks" "pre-commit"
+$hookSrc  = Join-Path $AGENT_DIR "scripts\hooks\pre-commit"
 $hookDest = Join-Path $HOOKS_DIR "pre-commit"
 
 if (Test-Path $hookSrc) {

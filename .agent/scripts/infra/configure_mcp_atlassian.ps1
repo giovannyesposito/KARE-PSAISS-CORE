@@ -1,4 +1,4 @@
-$ErrorActionPreference = "Stop"
+﻿$ErrorActionPreference = "Stop"
 
 # ---------------------------------------------------------------------------
 # Delega toda a lógica de configuração para kare_credentials.py (AES-256-GCM)

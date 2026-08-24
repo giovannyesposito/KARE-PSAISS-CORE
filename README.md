@@ -245,6 +245,21 @@ git --version
 
 A instalação foi desenhada para **qualquer perfil**, técnico ou não: um único comando interativo cuida de pré-requisitos, dependências, segurança e credenciais.
 
+### Caminho rápido: `npx`
+
+Se você já tem Node.js instalado, o jeito mais rápido é o wizard interativo
+via `npx` — pergunta o diretório de destino, quais IDEs configurar (VS Code,
+Cursor, IntelliJ, Claude Code, Gemini CLI), instala tudo, e oferece
+configurar credenciais Atlassian e abrir a IDE no final:
+
+```bash
+npx @dit-h/kare-spec install
+```
+
+Isso substitui os Passos 1-4 abaixo. Use o caminho manual (`git clone` +
+`setup.ps1`/`setup.sh`) se preferir mais controle sobre cada etapa, ou se
+não tiver Node.js disponível.
+
 ### Passo 1: Clonar o repositório
 
 ```powershell
