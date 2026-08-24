@@ -1,0 +1,1028 @@
+{
+  "version": "1.0.0",
+  "generated_at": "2026-08-24T18:44:21.793638+00:00",
+  "total_skills": 72,
+  "skills": [
+    {
+      "name": "backlog-management",
+      "path": ".agent/skills/01-upstream/backlog-management/SKILL.md",
+      "description": "Gestão e manutenção do Product Backlog. Priorização com frameworks (WSJF, MoSCoW, RICE), refinamento de stories, épicos e features, sprint planning e gestão de dívida técnica no backlog. Gera BACKLOG.md versionado.",
+      "triggers": [
+        "backlog",
+        "priorização",
+        "refinamento",
+        "sprint planning",
+        "WSJF",
+        "MoSCoW",
+        "RICE",
+        "/refine",
+        "/sprint-plan"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.775576+00:00"
+    },
+    {
+      "name": "bcp-counting",
+      "path": ".agent/skills/01-upstream/bcp-counting/SKILL.md",
+      "description": "Contagem de BCP (Business Complexity Points) para User Stories e Backlog Items. Avalia 10 dimensões de complexidade de negócio segundo a régua CI&T, com critérios em PT-BR e tamanhos válidos por dimensão. Use quando precisar estimar complexidade de stories, features ou épicos em BCPs.",
+      "triggers": [
+        "BCP",
+        "Business Complexity Points",
+        "complexidade de negócio",
+        "contar BCP",
+        "estimar complexidade",
+        "régua de complexidade",
+        "pontos de complexidade",
+        "quantos BCPs",
+        "sizing de story",
+        "complexidade da story"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.775888+00:00"
+    },
+    {
+      "name": "brainstorming",
+      "path": ".agent/skills/01-upstream/brainstorming/SKILL.md",
+      "description": "Socratic questioning protocol + user communication. MANDATORY for complex requests, new features, or unclear requirements. Includes progress reporting and error handling.",
+      "triggers": [],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.776074+00:00"
+    },
+    {
+      "name": "design-sprint",
+      "path": ".agent/skills/01-upstream/design-sprint/SKILL.md",
+      "description": "Apoio completo à condução e geração de artefatos de um Design Sprint (metodologia Google Ventures / Jake Knapp). Cobre as 5 fases do sprint: Entender, Esboçar, Decidir, Prototipar e Testar. Protocolo proativo: orienta facilitação dia a dia, gera templates de artefatos (HMW, Mapa, Storyboard, Plano de Teste), consolida aprendizados e recomenda próximos passos.",
+      "triggers": [
+        "design sprint",
+        "design thinking",
+        "sprint de design",
+        "hmw",
+        "how might we",
+        "como poderíamos",
+        "crazy 8s",
+        "lightning demo",
+        "storyboard",
+        "mapa do problema",
+        "entrevista de usuário",
+        "protótipo de baixa fidelidade",
+        "sprint week",
+        "/design-sprint",
+        "/gen-sprint"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.776337+00:00"
+    },
+    {
+      "name": "lean-inception",
+      "path": ".agent/skills/01-upstream/lean-inception/SKILL.md",
+      "description": "Apoio completo à condução e geração de artefatos da Lean Inception (metodologia Paulo Caroli). Cobre os 5 dias do workshop: Visão do Produto, É/Não É/Faz/Não Faz, Personas, Jornada, Brainstorming de Funcionalidades, Revisão Técnica/UX/Negócio, Sequenciador e MVP Canvas. Protocolo proativo: orienta facilitação, gera templates prontos e consolida backlog inicial.",
+      "triggers": [
+        "lean inception",
+        "inception",
+        "visão do produto",
+        "mvp canvas",
+        "sequenciador",
+        "é não é faz não faz",
+        "persona lean",
+        "jornada do usuário",
+        "brainstorming de funcionalidades",
+        "workshop de produto",
+        "/lean-inception",
+        "/gen-inception"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.776563+00:00"
+    },
+    {
+      "name": "project-discovery",
+      "path": ".agent/skills/01-upstream/project-discovery/SKILL.md",
+      "description": "Geração de Project Brief e PRD profissionais. Produz artefatos prontos para commit com rastreabilidade Brief → PRD → Épicos → Stories. Segue protocolo proativo: escaneia contexto e gera rascunho imediatamente.",
+      "triggers": [
+        "project brief",
+        "PRD",
+        "product requirements",
+        "requisitos de produto",
+        "/gen-brief",
+        "/gen-prd"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.776751+00:00"
+    },
+    {
+      "name": "user-story-craft",
+      "path": ".agent/skills/01-upstream/user-story-craft/SKILL.md",
+      "description": "Geração de User Stories, Epics e Features nos formatos corretos. Suporta Gherkin AC, INVEST checklist, DoR/DoD validação e detecção de stories vazias ou ambíguas. Protocolo proativo: lê PRD e gera rascunho sem esperar.",
+      "triggers": [
+        "user story",
+        "story",
+        "épico",
+        "epic",
+        "gherkin",
+        "critério de aceite",
+        "AC",
+        "DoR",
+        "DoD",
+        "/gen-story"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.776947+00:00"
+    },
+    {
+      "name": "user-story-mapping",
+      "path": ".agent/skills/01-upstream/user-story-mapping/SKILL.md",
+      "description": "Técnica de User Story Mapping (Jeff Patton): mapeia a jornada do usuário em Atividades ? Tarefas ? Stories, gerando mapa visual com slices de release (MVP, v1, v2). Use quando precisar organizar um backlog orientado à jornada do usuário, identificar gaps de cobertura, definir MVP ou planejar releases com base em fluxo de uso real. Invoque como /map-story ou ao mencionar \"story map\", \"mapa de stories\", \"jornada do usuário\", \"user story mapping\", \"backbone\", \"walking skeleton\".",
+      "triggers": [
+        "user story mapping",
+        "story map",
+        "mapa de stories",
+        "jornada do usuário",
+        "backbone",
+        "walking skeleton",
+        "slice de release",
+        "mapa de jornada",
+        "/map-story"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.777141+00:00"
+    },
+    {
+      "name": "whiteboard-html",
+      "path": ".agent/skills/01-upstream/whiteboard-html/SKILL.md",
+      "description": "",
+      "triggers": [],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.777350+00:00"
+    },
+    {
+      "name": "clean-code",
+      "path": ".agent/skills/02-downstream/clean-code/SKILL.md",
+      "description": "Pragmatic coding standards - concise, direct, no over-engineering, no unnecessary comments",
+      "triggers": [],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.777536+00:00"
+    },
+    {
+      "name": "code-generation-agile",
+      "path": ".agent/skills/02-downstream/code-generation-agile/SKILL.md",
+      "description": "Geração de código orientado por stories e ACs. Segue TDD (Red-Green-Refactor), respeita ADRs e patterns do projeto, e sempre verifica PROJECT_CONTEXT.md antes de gerar. Produz código limpo, sem over-engineering.",
+      "triggers": [
+        "gerar código",
+        "implementar story",
+        "TDD",
+        "red green refactor",
+        "implementação"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.777725+00:00"
+    },
+    {
+      "name": "coding-guidelines",
+      "path": ".agent/skills/02-downstream/coding-guidelines/SKILL.md",
+      "description": "Apply when writing, modifying, or reviewing code. Behavioral guidelines to reduce common LLM coding mistakes. Triggers on implementation tasks, code changes, refactoring, bug fixes, or feature development.",
+      "triggers": [],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.777907+00:00"
+    },
+    {
+      "name": "deployment-procedures",
+      "path": ".agent/skills/02-downstream/deployment-procedures/SKILL.md",
+      "description": "Production deployment principles and decision-making. Safe deployment workflows, rollback strategies, and verification. Teaches thinking, not scripts.",
+      "triggers": [],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.778102+00:00"
+    },
+    {
+      "name": "lint-and-validate",
+      "path": ".agent/skills/02-downstream/lint-and-validate/SKILL.md",
+      "description": "Automatic quality control, linting, and static analysis procedures. Use after every code modification to ensure syntax correctness and project standards. Triggers onKeywords: lint, format, check, validate, types, static analysis.",
+      "triggers": [],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.778265+00:00"
+    },
+    {
+      "name": "observability-patterns",
+      "path": ".agent/skills/02-downstream/observability-patterns/SKILL.md",
+      "description": "Patterns de observabilidade: logs estruturados, métricas, distributed tracing e SLOs. Define runbooks e alert strategy. Framework-agnóstico com exemplos para as principais stacks.",
+      "triggers": [
+        "observabilidade",
+        "monitoring",
+        "logs",
+        "métricas",
+        "tracing",
+        "SLO",
+        "alertas",
+        "runbook"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.778448+00:00"
+    },
+    {
+      "name": "performance-profiling",
+      "path": ".agent/skills/02-downstream/performance-profiling/SKILL.md",
+      "description": "Performance profiling principles. Measurement, analysis, and optimization techniques.",
+      "triggers": [],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.778624+00:00"
+    },
+    {
+      "name": "quality-gates",
+      "path": ".agent/skills/02-downstream/quality-gates/SKILL.md",
+      "description": "Quality gates automáticos: DoD check, AC validation, cobertura de testes, lint, segurança, performance e compliance. Define critérios mínimos por nível (story, sprint, release) e emite QA Report.",
+      "triggers": [
+        "quality gate",
+        "DoD",
+        "definition of done",
+        "checklist de qualidade",
+        "release checklist",
+        "AC validation"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.778805+00:00"
+    },
+    {
+      "name": "review-patterns",
+      "path": ".agent/skills/02-downstream/review-patterns/SKILL.md",
+      "description": "Code review principles e padrões de feedback construtivo. Detecta issues de segurança, performance, design e testabilidade. Gera relatório estruturado por severidade.",
+      "triggers": [
+        "code review",
+        "revisão de código",
+        "PR review",
+        "pull request",
+        "/review"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.778995+00:00"
+    },
+    {
+      "name": "systematic-debugging",
+      "path": ".agent/skills/02-downstream/systematic-debugging/SKILL.md",
+      "description": "4-phase systematic debugging methodology with root cause analysis and evidence-based verification. Use when debugging complex issues.",
+      "triggers": [],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.779162+00:00"
+    },
+    {
+      "name": "tdd-workflow",
+      "path": ".agent/skills/02-downstream/tdd-workflow/SKILL.md",
+      "description": "Test-Driven Development workflow principles. RED-GREEN-REFACTOR cycle.",
+      "triggers": [],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.779333+00:00"
+    },
+    {
+      "name": "test-artifact-generation",
+      "path": ".agent/skills/02-downstream/test-artifact-generation/SKILL.md",
+      "description": "Geração automática de Test Plans, Test Cases e relatórios de cobertura. Suporta BDD (Gherkin), test pyramid e estratégias por tipo de projeto. Detecta gaps de cobertura analisando stories e AC.",
+      "triggers": [
+        "test plan",
+        "plano de testes",
+        "test cases",
+        "casos de teste",
+        "BDD",
+        "test pyramid",
+        "/gen-testplan"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.779512+00:00"
+    },
+    {
+      "name": "webapp-testing",
+      "path": ".agent/skills/02-downstream/webapp-testing/SKILL.md",
+      "description": "Web application testing principles. E2E, Playwright, deep audit strategies.",
+      "triggers": [],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.779680+00:00"
+    },
+    {
+      "name": "adr-patterns",
+      "path": ".agent/skills/03-architecture/adr-patterns/SKILL.md",
+      "description": "Geração e manutenção de Architecture Decision Records (ADRs) e RFCs. Detecta decisões implícitas no código ou conversas, gera ADR preenchido proativamente, mantém índice e rastreia status.",
+      "triggers": [
+        "ADR",
+        "architecture decision",
+        "decisão técnica",
+        "RFC",
+        "/gen-adr"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.779865+00:00"
+    },
+    {
+      "name": "api-patterns",
+      "path": ".agent/skills/03-architecture/api-patterns/SKILL.md",
+      "description": "API design principles and decision-making. REST vs GraphQL vs tRPC selection, response formats, versioning, pagination.",
+      "triggers": [],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.780034+00:00"
+    },
+    {
+      "name": "app-builder",
+      "path": ".agent/skills/03-architecture/app-builder/SKILL.md",
+      "description": "Main application building orchestrator. Creates full-stack applications from natural language requests. Determines project type, selects tech stack, coordinates agents.",
+      "triggers": [],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.780205+00:00"
+    },
+    {
+      "name": "templates",
+      "path": ".agent/skills/03-architecture/app-builder/templates/SKILL.md",
+      "description": "Project scaffolding templates for new applications. Use when creating new projects from scratch. Contains 12 templates for various tech stacks.",
+      "triggers": [],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.780373+00:00"
+    },
+    {
+      "name": "architecture",
+      "path": ".agent/skills/03-architecture/architecture/SKILL.md",
+      "description": "Architectural decision-making framework. Requirements analysis, trade-off evaluation, ADR documentation. Use when making architecture decisions or analyzing system design.",
+      "triggers": [],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.780539+00:00"
+    },
+    {
+      "name": "database-design",
+      "path": ".agent/skills/03-architecture/database-design/SKILL.md",
+      "description": "Database design principles and decision-making. Schema design, indexing strategy, ORM selection, serverless databases.",
+      "triggers": [],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.780706+00:00"
+    },
+    {
+      "name": "nodejs-best-practices",
+      "path": ".agent/skills/03-architecture/nodejs-best-practices/SKILL.md",
+      "description": "Node.js development principles and decision-making. Framework selection, async patterns, security, and architecture. Teaches thinking, not copying.",
+      "triggers": [],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.780886+00:00"
+    },
+    {
+      "name": "plan-writing",
+      "path": ".agent/skills/03-architecture/plan-writing/SKILL.md",
+      "description": "Structured task planning with clear breakdowns, dependencies, and verification criteria. Use when implementing features, refactoring, or any multi-step work.",
+      "triggers": [],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.781058+00:00"
+    },
+    {
+      "name": "python-patterns",
+      "path": ".agent/skills/03-architecture/python-patterns/SKILL.md",
+      "description": "Python development principles and decision-making. Framework selection, async patterns, type hints, project structure. Teaches thinking, not copying.",
+      "triggers": [],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.781237+00:00"
+    },
+    {
+      "name": "risk-management",
+      "path": ".agent/skills/03-architecture/risk-management/SKILL.md",
+      "description": "Identificação, avaliação e mitigação de riscos de produto, técnicos e de negócio. Gera RISK_REGISTER.md versionado, aplica matriz de probabilidade × impacto e monitora status dos riscos por sprint.",
+      "triggers": [
+        "risco",
+        "risk",
+        "risk register",
+        "matriz de risco",
+        "mitigação",
+        "/gen-risk"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.781417+00:00"
+    },
+    {
+      "name": "svg-draw-diagrams",
+      "path": ".agent/skills/03-architecture/svg-draw-diagrams/SKILL.md",
+      "description": "Gera diagramas SVG dinâmicos a partir de descrições YAML, com suporte a ícones customizados ou formas geométricas básicas. Use quando precisar criar diagramas arquiteturais visuais, representar componentes com ícones, gerar blueprints de arquitetura, fluxogramas ou diagramas C4 Model.",
+      "triggers": [],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.781642+00:00"
+    },
+    {
+      "name": "jira-assistant",
+      "path": ".agent/skills/04-governance/jira-assistant/SKILL.md",
+      "description": "Expert in Jira operations using Atlassian MCP — automatically discovers the connected Jira Cloud site and adapts to the workspace operating model. Detects workspace context when present and adjusts issue type awareness, hierarchy, and field guidance accordingly. Use for searching, creating, updating issues, managing status transitions, and handling tasks across any Jira project.",
+      "triggers": [],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.781837+00:00"
+    },
+    {
+      "name": "jira-portfolio",
+      "path": ".agent/skills/04-governance/jira-portfolio/SKILL.md",
+      "description": "Portfolio governance for the workspace operating model. Covers the lifecycle of Iniciativas and Épicos in Jira Cloud, including the TO BE workflow with all statuses and transitions, automation rules for upstream propagation (Feature → Épico → Iniciativa), and cascade rules for Concluído and Cancelado. Use when managing or reviewing portfolio items above the Feature layer, setting up Jira workflows, or checking whether automations are correctly configured.",
+      "triggers": [],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.782029+00:00"
+    },
+    {
+      "name": "jira-workspace-guide",
+      "path": ".agent/skills/04-governance/jira-workspace-guide/SKILL.md",
+      "description": "Guidance for Jira operations following the workspace operating model. Use when creating or updating Features, Tarefas and Subtarefas in any configured workspace, deciding whether Historia can be used, validating hierarchy, assigning ART or squad correctly, avoiding duplicate tickets, and applying requirements engineering methods during elicitation and refinement.",
+      "triggers": [],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.782222+00:00"
+    },
+    {
+      "name": "azure-iac-engineer",
+      "path": ".agent/skills/05-tech-stack/azure-iac-engineer/SKILL.md",
+      "description": "Agente especialista em Infrastructure as Code (IaC) no Azure para o projeto: Terraform para recursos cloud, ARM/Bicep para templates Azure, AKS para orquestração de containers e políticas de segurança via Azure Policy e RBAC.",
+      "triggers": [
+        "terraform",
+        "azure",
+        "AKS",
+        "bicep",
+        "ARM template",
+        "infraestrutura como código",
+        "IaC",
+        "kubernetes azure",
+        "azure policy"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.782423+00:00"
+    },
+    {
+      "name": "elastic-observability",
+      "path": ".agent/skills/05-tech-stack/elastic-observability/SKILL.md",
+      "description": "Agente especialista em observabilidade do projeto via Elastic Stack: ingestão de eventos Kafka → Logstash/Vector → Elasticsearch, dashboards Kibana para SLO/SLA, alertas de anomalia e correlação de logs entre os sistemas distribuídos B2B (Salesforce, ServiceNow, BRM, HPE-SD).",
+      "triggers": [
+        "elastic",
+        "kibana",
+        "logstash",
+        "elasticsearch",
+        "observabilidade",
+        "SLO",
+        "alertas",
+        "logs",
+        "APM",
+        "ELK"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.782619+00:00"
+    },
+    {
+      "name": "gcp-analytics-agent",
+      "path": ".agent/skills/05-tech-stack/gcp-analytics-agent/SKILL.md",
+      "description": "Agente especialista em analytics e dados no GCP para o projeto: BigQuery para data warehouse, Vertex AI para modelos de ML (churn prediction, propensão de venda B2B), Dataflow para pipelines de dados e integração com Kafka e Elasticsearch.",
+      "triggers": [
+        "bigquery",
+        "vertex AI",
+        "dataflow",
+        "GCP",
+        "machine learning",
+        "churn prediction",
+        "data warehouse",
+        "analytics B2B",
+        "propensão de compra"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.782814+00:00"
+    },
+    {
+      "name": "harness-cicd-engineer",
+      "path": ".agent/skills/05-tech-stack/harness-cicd-engineer/SKILL.md",
+      "description": "Agente especialista em CI/CD para o projeto via Harness + Azure DevOps: pipelines YAML de build/deploy para Salesforce, MuleSoft, Java/Kotlin e infraestrutura Terraform. Padrões de GitOps, quality gates e rollback automatizado na organização.",
+      "triggers": [
+        "harness",
+        "CI/CD",
+        "pipeline",
+        "deploy automatizado",
+        "azure devops",
+        "quality gate",
+        "rollback",
+        "gitops",
+        "blue green deploy"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.783001+00:00"
+    },
+    {
+      "name": "kafka-event-architect",
+      "path": ".agent/skills/05-tech-stack/kafka-event-architect/SKILL.md",
+      "description": "Agente especialista em Apache Kafka para o projeto: topologia de tópicos, producers/consumers em Java/Kotlin, serialização Avro, padrão Saga para transações distribuídas e Kafka Streams para processamento de eventos em tempo real. Stack de eventos B2B do projeto.",
+      "triggers": [
+        "kafka",
+        "event driven",
+        "producer consumer",
+        "tópico kafka",
+        "saga pattern",
+        "kafka streams",
+        "avro schema",
+        "mensageria",
+        "event sourcing"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.783195+00:00"
+    },
+    {
+      "name": "mulesoft-developer",
+      "path": ".agent/skills/05-tech-stack/mulesoft-developer/SKILL.md",
+      "description": "Agente especialista em MuleSoft/Anypoint Platform para o projeto: DataWeave 2.0, RAML/OAS, Mule 4 flows, integrações entre Salesforce/ServiceNow/ BRM/HPE-SD e padrões de API Management via 3SCALE. Hub de integração B2B do projeto.",
+      "triggers": [
+        "mulesoft",
+        "anypoint",
+        "dataweave",
+        "RAML",
+        "mule flow",
+        "integração mulesoft",
+        "ESB",
+        "middleware",
+        "anypoint studio"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.783384+00:00"
+    },
+    {
+      "name": "openapi-3scale-developer",
+      "path": ".agent/skills/05-tech-stack/openapi-3scale-developer/SKILL.md",
+      "description": "Agente especialista em design e gestão de APIs REST para o projeto: especificações OpenAPI 3.0, publicação e governança via Red Hat 3SCALE API Manager, políticas de rate limiting, autenticação OAuth2/OIDC e catálogo de APIs B2B do projeto no Developer Portal.",
+      "triggers": [
+        "openapi",
+        "3SCALE",
+        "API design",
+        "swagger",
+        "rate limiting",
+        "API gateway",
+        "Developer Portal",
+        "OAuth2",
+        "API contract",
+        "API first"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.783572+00:00"
+    },
+    {
+      "name": "salesforce-developer",
+      "path": ".agent/skills/05-tech-stack/salesforce-developer/SKILL.md",
+      "description": "Agente especialista em desenvolvimento Salesforce B2B: Apex classes/triggers, Lightning Web Components (LWC), SOQL, integrações via REST/SOAP e automações com Flow Builder. Conhecimento específico do B2B Commerce Cloud e Sales Cloud do projeto.",
+      "triggers": [
+        "salesforce",
+        "apex",
+        "LWC",
+        "SOQL",
+        "flow builder",
+        "B2B Commerce",
+        "Sales Cloud",
+        "Salesforce trigger",
+        "object salesforce"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.783762+00:00"
+    },
+    {
+      "name": "servicenow-developer",
+      "path": ".agent/skills/05-tech-stack/servicenow-developer/SKILL.md",
+      "description": "Agente especialista em ServiceNow para o projeto: GlideScript, workflows de Service Order Management (SOM), REST integrations, Business Rules, Script Includes e catálogo de serviços B2B do projeto.",
+      "triggers": [
+        "servicenow",
+        "glide",
+        "SOM",
+        "service order",
+        "business rule",
+        "script include",
+        "catálogo servicenow",
+        "workflow servicenow"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.783958+00:00"
+    },
+    {
+      "name": "agent-builder-autogen",
+      "path": ".agent/skills/06-platform/agent-builder-autogen/SKILL.md",
+      "description": "Meta-agente que cria novos agentes KARE a partir de descrições em linguagem natural: gera o arquivo .agent.md, configura frontmatter, define tools permitidas (Tool Guard) e registra no SKILL-REGISTRY.json. Framework: AutoGen.",
+      "triggers": [
+        "criar novo agente",
+        "AgentBuilder",
+        "meta-agente",
+        "novo skill",
+        "configurar agente",
+        "registrar agente",
+        "gerar .agent.md"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.784148+00:00"
+    },
+    {
+      "name": "agent-simulation-testing",
+      "path": ".agent/skills/06-platform/agent-simulation-testing/SKILL.md",
+      "description": "Simula usuários reais interagindo com agentes KARE para testar robustez, cobertura de edge cases e comportamento antes do deploy em produção. Equivalente a CI/CD E2E para o ecossistema de agentes. Framework: LangGraph.",
+      "triggers": [
+        "simulação de agente",
+        "testar agente",
+        "edge cases",
+        "validar antes do deploy",
+        "chatbot simulation",
+        "suite de testes de agente",
+        "CI/CD de agentes"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.784339+00:00"
+    },
+    {
+      "name": "backlog-architect-plan-execute",
+      "path": ".agent/skills/06-platform/backlog-architect-plan-execute/SKILL.md",
+      "description": "Planejamento ágil via Plan-and-Execute no LangGraph: primeiro cria um plano de sprint completo (tarefas, sequência, dependências), depois executa cada etapa monitorando progresso. Replanning automático quando bloqueios são detectados. Agente: @backlog-architect.",
+      "triggers": [
+        "plan and execute",
+        "planejar sprint",
+        "replanning",
+        "planejamento adaptativo",
+        "backlog architect",
+        "sprint planning inteligente"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.784529+00:00"
+    },
+    {
+      "name": "behavioral-modes",
+      "path": ".agent/skills/06-platform/behavioral-modes/SKILL.md",
+      "description": "AI operational modes (brainstorm, implement, debug, review, teach, ship, orchestrate). Use to adapt behavior based on task type.",
+      "triggers": [],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.784706+00:00"
+    },
+    {
+      "name": "code-author-autogen",
+      "path": ".agent/skills/06-platform/code-author-autogen/SKILL.md",
+      "description": "Ciclo completo TDD assistido via AutoGen: geração de código → execução em sandbox → debugging automático → feedback humano (HITL). Suporte a Python, TypeScript, Java, Go e Kotlin sem configuração adicional de linguagem.",
+      "triggers": [
+        "autogen",
+        "sandbox de execução",
+        "auto debug",
+        "gerar e executar código",
+        "human feedback loop",
+        "TDD assistido",
+        "compilar e testar"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.784898+00:00"
+    },
+    {
+      "name": "code-author-langgraph",
+      "path": ".agent/skills/06-platform/code-author-langgraph/SKILL.md",
+      "description": "Agente de código com grafo de estados auditável via LangGraph: gerar → validar → corrigir → revisar. Cada transição é rastreável e compatível com ORCHESTRATION_REPORT.md. Suporte multi-linguagem para toda a stack do projeto.",
+      "triggers": [
+        "langgraph código",
+        "grafo de estados",
+        "geração multi-linguagem",
+        "código auditável",
+        "state machine código",
+        "rastreabilidade de geração"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.785086+00:00"
+    },
+    {
+      "name": "context-resolver",
+      "path": ".agent/skills/06-platform/context-resolver/SKILL.md",
+      "description": "Resolução de contexto em 3 cenários: Grafo como índice → SQLite como cache → Confluence como fonte da verdade. Use quando precisar acessar contexto de iniciativa (INI-XXX), decisão arquitetural, histórico de demanda ou qualquer conhecimento do projeto armazenado no Confluence. Aciona busca no grafo local, valida cache SQLite com TTL e busca via MCP Atlassian quando necessário.",
+      "triggers": [
+        "contexto de INI-",
+        "o que foi decidido",
+        "histórico da iniciativa",
+        "sobre a demanda",
+        "o que é a INI-",
+        "qual o status de",
+        "buscar contexto",
+        "context-resolver"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.785327+00:00"
+    },
+    {
+      "name": "context-resolver-agentic-rag",
+      "path": ".agent/skills/06-platform/context-resolver-agentic-rag/SKILL.md",
+      "description": "Agentic RAG via LangGraph: o agente decide a estratégia de recuperação mais adequada para cada query (semântica, BM25, grafo ou híbrida) antes de gerar resposta. Eleva confidence_score médio para >= 0.80. Alinha ao Hybrid Query Planner do context-resolver.",
+      "triggers": [
+        "agentic rag",
+        "estratégia de recuperação",
+        "hybrid query planner",
+        "confidence score",
+        "RAG adaptativo",
+        "busca inteligente",
+        "contexto de INI"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.785528+00:00"
+    },
+    {
+      "name": "delivery-observer-sql",
+      "path": ".agent/skills/06-platform/delivery-observer-sql/SKILL.md",
+      "description": "Agente que interpreta perguntas em linguagem natural sobre o estado do projeto e as converte em queries SQL contra o banco de dados do KARE (session_store.db / SQLite). Responde perguntas como \"Quantas stories foram entregues no último sprint?\". Framework: LangGraph.",
+      "triggers": [
+        "SQL agent",
+        "consulta ao banco",
+        "quantas stories",
+        "métricas de projeto",
+        "velocity",
+        "burn down",
+        "relatório de entrega",
+        "status do sprint"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.785739+00:00"
+    },
+    {
+      "name": "documentation-templates",
+      "path": ".agent/skills/06-platform/documentation-templates/SKILL.md",
+      "description": "Documentation templates and structure guidelines. README, API docs, code comments, and AI-friendly documentation.",
+      "triggers": [],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.785960+00:00"
+    },
+    {
+      "name": "intelligent-routing",
+      "path": ".agent/skills/06-platform/intelligent-routing/SKILL.md",
+      "description": "Automatic agent selection and intelligent task routing. Analyzes user requests and automatically selects the best specialist agent(s) without requiring explicit user mentions.",
+      "triggers": [],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.786178+00:00"
+    },
+    {
+      "name": "kare-operating-model",
+      "path": ".agent/skills/06-platform/kare-operating-model/SKILL.md",
+      "description": "Modelo operacional genérico do KARE-SPEC. Define protocolos de atuação dos agentes, estrutura de camadas upstream/downstream, fluxo de aprovação, rastreabilidade e integração com RAG. Usado pelo @kare-orchestrator como referência de operação.",
+      "triggers": [
+        "modelo operacional",
+        "como funciona o kare",
+        "protocolo de operação",
+        "camadas upstream downstream"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.786384+00:00"
+    },
+    {
+      "name": "mcp-builder",
+      "path": ".agent/skills/06-platform/mcp-builder/SKILL.md",
+      "description": "MCP (Model Context Protocol) server building principles. Tool design, resource patterns, best practices.",
+      "triggers": [],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.786573+00:00"
+    },
+    {
+      "name": "orchestration-patterns",
+      "path": ".agent/skills/06-platform/orchestration-patterns/SKILL.md",
+      "description": "Meta-skill de orquestração do ecossistema KARE. Determina qual agente e skill ativar com base no contexto da solicitação. Roteamento automático multi-agente com handoff de contexto.",
+      "triggers": [
+        "sempre ativo como meta-roteador do ecossistema KARE",
+        "/orchestrate"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.786754+00:00"
+    },
+    {
+      "name": "orchestrator-agentops",
+      "path": ".agent/skills/06-platform/orchestrator-agentops/SKILL.md",
+      "description": "Observabilidade do ecossistema KARE via AgentOps: rastreia chamadas LLM, uso de ferramentas, latência, erros e custo por sessão. Complementa o ORCHESTRATION_REPORT.md com métricas em tempo real. Framework: AutoGen.",
+      "triggers": [
+        "agentops",
+        "observabilidade de agentes",
+        "rastrear chamadas LLM",
+        "custo por sessão",
+        "latência do agente",
+        "monitoramento KARE",
+        "auditoria de ferramentas",
+        "dashboard de uso"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.786952+00:00"
+    },
+    {
+      "name": "orchestrator-langgraph",
+      "path": ".agent/skills/06-platform/orchestrator-langgraph/SKILL.md",
+      "description": "Implementa times hierárquicos de agentes no @kare-orchestrator via LangGraph: o supervisor delega para sub-agentes especializados de forma estruturada, com grafo de execução auditável e suporte a times paralelos e sequenciais.",
+      "triggers": [
+        "times hierárquicos",
+        "hierarchical agents",
+        "supervisor agent",
+        "multi-agent coordination",
+        "orquestração LangGraph",
+        "delegação estruturada"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.787146+00:00"
+    },
+    {
+      "name": "parallel-agents",
+      "path": ".agent/skills/06-platform/parallel-agents/SKILL.md",
+      "description": "Multi-agent orchestration patterns. Use when multiple independent tasks can run with different domain expertise or when comprehensive analysis requires multiple perspectives.",
+      "triggers": [],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.787317+00:00"
+    },
+    {
+      "name": "proactive-agent-protocol",
+      "path": ".agent/skills/06-platform/proactive-agent-protocol/SKILL.md",
+      "description": "Behavioral Contract para todos os agentes KARE. Define o protocolo \"Aja Primeiro, Valide Depois\": escaneia contexto disponível, infere gaps, gera rascunho completo e solicita feedback incremental. Proibido conduzir enquetes antes de agir.",
+      "triggers": [
+        "sempre ativo (injeta comportamento em todos os agentes KARE)"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.787520+00:00"
+    },
+    {
+      "name": "project-context",
+      "path": ".agent/skills/06-platform/project-context/SKILL.md",
+      "description": "Diagnóstico e roteamento Brownfield × Greenfield. Gate de entrada obrigatório que analisa o projeto, emite PROJECT_CONTEXT.md e define a trilha de execução correta para todos os outros agentes.",
+      "triggers": [
+        "diagnosticar projeto",
+        "brownfield ou greenfield",
+        "iniciar projeto",
+        "PROJECT_CONTEXT",
+        "/init-project"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.787697+00:00"
+    },
+    {
+      "name": "quality-guardian-agenteval",
+      "path": ".agent/skills/06-platform/quality-guardian-agenteval/SKILL.md",
+      "description": "Avaliação automatizada de artefatos KARE (US, PRD, ACs, código, ADRs) com score objetivo e critérios configuráveis por tipo. Base técnica para o @quality-guardian avaliar qualidade sem intervenção humana. Framework: AutoGen.",
+      "triggers": [
+        "avaliação de artefatos",
+        "score de qualidade",
+        "agenteval",
+        "DoR score",
+        "DoD score",
+        "qualidade de story",
+        "qualidade de PRD",
+        "autoavaliação",
+        "validar artefato"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.787897+00:00"
+    },
+    {
+      "name": "rag-continual-learning",
+      "path": ".agent/skills/06-platform/rag-continual-learning/SKILL.md",
+      "description": "Pipeline automatizado que ingere novos documentos do Confluence/Jira e os incorpora ao RAG KARE sem intervenção manual — mantendo o grafo de conhecimento atualizado a cada commit ou publicação. Framework: AutoGen.",
+      "triggers": [
+        "atualização automática do RAG",
+        "continual learning",
+        "ingestão contínua",
+        "sync Confluence",
+        "knowledge base update",
+        "RAG autoatualização"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.788096+00:00"
+    },
+    {
+      "name": "rag-corrective",
+      "path": ".agent/skills/06-platform/rag-corrective/SKILL.md",
+      "description": "CRAG (Corrective Retrieval-Augmented Generation): avalia a relevância dos documentos recuperados e, quando insuficientes, aciona recuperação corretiva antes de gerar a resposta. Elimina alucinações causadas por contexto de baixa qualidade. Framework: LangGraph.",
+      "triggers": [
+        "CRAG",
+        "corrective RAG",
+        "contexto insuficiente",
+        "alucinação",
+        "recuperação corretiva",
+        "relevância de documentos",
+        "fallback de busca"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.788285+00:00"
+    },
+    {
+      "name": "reflection-quality",
+      "path": ".agent/skills/06-platform/reflection-quality/SKILL.md",
+      "description": "Agente que critica e revisa os próprios outputs antes de entregar ao humano, operando como QA interno para qualquer agente KARE. Reduz ciclos de revisão humana com artefatos pré-validados. Framework: LangGraph.",
+      "triggers": [
+        "reflexão",
+        "auto-revisão",
+        "reflection agent",
+        "QA interno",
+        "revisar antes de entregar",
+        "pré-validação de artefato",
+        "critique loop"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.788476+00:00"
+    },
+    {
+      "name": "security-red-team",
+      "path": ".agent/skills/06-platform/security-red-team/SKILL.md",
+      "description": "Agente Red Team de segurança que valida sistemas e artefatos KARE contra vulnerabilidades OWASP Top 10, prompt injection e ataques específicos de agentes de IA (jailbreak, context poisoning). Uso exclusivo em staging. Framework: Industry (Decepticon / Red Team pattern).",
+      "triggers": [
+        "red team",
+        "segurança",
+        "vulnerabilidade",
+        "OWASP",
+        "prompt injection",
+        "pentest",
+        "auditoria de segurança",
+        "jailbreak"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.788685+00:00"
+    },
+    {
+      "name": "self-evaluation-loop",
+      "path": ".agent/skills/06-platform/self-evaluation-loop/SKILL.md",
+      "description": "Loop de auto-avaliação contínua que compara outputs de agentes com critérios de qualidade KARE (INVEST, DoR, DoD, padrões do projeto). Gera score 0-100 e aciona Corrective RAG quando lacunas de contexto são detectadas como causa de baixa qualidade. Framework: CrewAI.",
+      "triggers": [
+        "auto-avaliação",
+        "self-evaluation",
+        "quality score",
+        "INVEST check",
+        "DoR validação",
+        "qualidade contínua",
+        "feedback loop"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.788885+00:00"
+    },
+    {
+      "name": "session-compressor",
+      "path": ".agent/skills/06-platform/session-compressor/SKILL.md",
+      "description": "Comprime sessões longas (+2h) gerando um checkpoint estruturado em memories/session/. Salva: decisões tomadas, ações executadas, estado atual e próximos passos. Use quando o contexto parecer \"pesado\" ou ao receber aviso de timeout de sessão do loop_guard. Invoke com /compress-session.",
+      "triggers": [
+        "/compress-session",
+        "comprimir sessão",
+        "checkpoint de sessão",
+        "contexto muito longo",
+        "session timeout",
+        "KARE_SESSION_TIMEOUT",
+        "sessão travada",
+        "resumir o que foi feito"
+      ],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.789104+00:00"
+    },
+    {
+      "name": "vulnerability-scanner",
+      "path": ".agent/skills/06-platform/vulnerability-scanner/SKILL.md",
+      "description": "Advanced vulnerability analysis principles. OWASP 2025, Supply Chain Security, attack surface mapping, risk prioritization.",
+      "triggers": [],
+      "agents_using": [],
+      "deprecated": false,
+      "last_scanned": "2026-08-24T18:44:21.789336+00:00"
+    }
+  ]
+}

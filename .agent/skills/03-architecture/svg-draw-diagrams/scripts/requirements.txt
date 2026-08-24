@@ -1,0 +1,12 @@
+# SVG Diagram Generator Dependencies
+# Python 3.8+
+
+# YAML parsing — pinned com floor de segurança (CVE-2017-18342 / CVE-2020-14343 corrigidos em 5.1+)
+PyYAML>=6.0.1,<7.0
+
+# SVG generation — sem CVEs conhecidos; pinado para evitar mudanças de breaking change
+svgwrite>=1.4.3,<2.0
+
+# Optional: Advanced layout algorithms (requires system Graphviz)
+# Descomente apenas em ambientes controlados; pygraphviz invoca binários do sistema.
+# pygraphviz>=1.11,<2.0

@@ -1,0 +1,27 @@
+{
+  "libraryName": "kare-copilot",
+  "outputRoot": ".",
+  "coreAgents": [
+    ".agent/agents/kare-orchestrator.md",
+    ".agent/agents/product-discovery.md",
+    ".agent/agents/story-crafter.md",
+    ".agent/agents/backlog-architect.md",
+    ".agent/agents/quality-guardian.md",
+    ".agent/agents/risk-analyst.md",
+    ".agent/agents/tech-decision-maker.md",
+    ".agent/agents/prd-reviewer.md"
+  ],
+  "skillsDirectories": [],
+  "workflows": [
+    ".agent/workflows/create.prompt.md",
+    ".agent/workflows/story.prompt.md",
+    ".agent/workflows/sprint.prompt.md",
+    ".agent/workflows/quality.prompt.md",
+    ".agent/workflows/risk.prompt.md",
+    ".agent/workflows/decision.prompt.md",
+    ".agent/workflows/status.prompt.md",
+    ".agent/workflows/create-issues-jira.prompt.md"
+  ],
+  "contexts": [],
+  "artifacts": []
+}

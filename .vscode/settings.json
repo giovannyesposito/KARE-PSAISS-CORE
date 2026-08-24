@@ -1,0 +1,27 @@
+{
+  // ─── KARE-SPEC Slash Commands (Prompt Files) ──────────────────────────────
+  // Aponta para os workflows como slash commands no Copilot Chat.
+  // Uso: /create, /story, /sprint, /implement, /review, /test, /quality,
+  //       /risk, /decision, /release, /status, /observe, /orchestrate,
+  //       /kare-flow, etc.
+  "chat.promptFilesLocations": {
+    ".agent/workflows": true
+  },
+
+  // ─── KARE-SPEC Instructions (Always-on Rules) ────────────────────────────
+  // Carrega automaticamente as instruções do KARE-SPEC em toda conversa.
+  "chat.instructionsFilesLocations": {
+    ".agent/rules": true,
+    ".agent/workflows": true
+  },
+  "python-envs.defaultEnvManager": "ms-python.python:system",
+
+  // ─── KARE-SPEC Context Engine — SQLite/FTS5 standalone ───────────────────
+  // Sem servidor. Use: python .agent/scripts/ai/kare_rag.py bootstrap
+  // Tasks disponíveis: Bootstrap, Status, Export, Import, Migrate
+  "task.allowAutomaticTasks": "off",
+  "neo4j.connection": {
+    "uri": "bolt://127.0.0.1:7687",
+    "username": "neo4j"
+  }
+}

@@ -1,0 +1,128 @@
+# C4 Container Diagram — Internet Banking System
+# Reprodução do diagrama canônico de https://c4model.com/diagrams/container
+# Imagem de referência: https://c4model.com/images/examples/Containers.png
+
+metadata:
+  title: "Container Diagram for Internet Banking System"
+  type: c4-container
+  dimensions:
+    width: 1400
+    height: 920
+  show_legend: true
+
+elements:
+  - id: customer
+    kind: person
+    label: "Personal Banking Customer"
+    description: "A customer of the bank, with personal bank accounts."
+    external: false
+
+  - id: web-app
+    kind: container
+    label: "Web Application"
+    technology: "Java and Spring MVC"
+    description: "Delivers the static content and the Internet banking single page application."
+    parent: boundary-ibs
+
+  - id: spa
+    kind: container
+    label: "Single-Page Application"
+    technology: "JavaScript and Angular"
+    description: "Provides all of the Internet banking functionality to customers via their web browser."
+    parent: boundary-ibs
+
+  - id: mobile-app
+    kind: container
+    label: "Mobile App"
+    technology: "Xamarin"
+    description: "Provides a limited subset of the Internet banking functionality to customers via their mobile device."
+    parent: boundary-ibs
+
+  - id: api-app
+    kind: container
+    label: "API Application"
+    technology: "Java and Spring MVC"
+    description: "Provides Internet banking functionality via a JSON/HTTPS API."
+    parent: boundary-ibs
+
+  - id: database
+    kind: container
+    label: "Database"
+    technology: "Oracle Database Schema"
+    description: "Stores user registration information, hashed authentication credentials, access logs, etc."
+    shape: cylinder
+    parent: boundary-ibs
+
+  - id: email-system
+    kind: software_system
+    label: "E-mail System"
+    description: "The internal Microsoft Exchange e-mail system."
+    external: true
+
+  - id: mainframe
+    kind: software_system
+    label: "Mainframe Banking System"
+    description: "Stores all of the core banking information about customers, accounts, transactions, etc."
+    external: true
+
+boundaries:
+  - id: boundary-ibs
+    label: "Internet Banking System"
+    style: dashed
+
+relationships:
+  - from: customer
+    to: web-app
+    label: "Visits bigbank.com/ib using"
+    protocol: "HTTPS"
+    style: solid
+
+  - from: customer
+    to: spa
+    label: "Views account balances and makes payments using"
+    style: solid
+
+  - from: customer
+    to: mobile-app
+    label: "Views account balances and makes payments using"
+    style: solid
+
+  - from: customer
+    to: email-system
+    label: "Sends e-mails to"
+    style: dashed
+
+  - from: web-app
+    to: spa
+    label: "Delivers to the customer's web browser"
+    style: solid
+
+  - from: spa
+    to: api-app
+    label: "Makes API calls to"
+    protocol: "JSON/HTTPS"
+    style: dashed
+
+  - from: mobile-app
+    to: api-app
+    label: "Makes API calls to"
+    protocol: "JSON/HTTPS"
+    style: dashed
+
+  - from: api-app
+    to: database
+    label: "Reads from and writes to"
+    protocol: "JDBC"
+    style: solid
+
+  - from: api-app
+    to: email-system
+    label: "Sends e-mails using"
+    protocol: "SMTP"
+    style: dashed
+
+  - from: api-app
+    to: mainframe
+    label: "Makes API calls to"
+    protocol: "XML/HTTPS"
+    style: dashed

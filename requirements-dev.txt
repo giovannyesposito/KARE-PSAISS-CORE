@@ -1,0 +1,6 @@
+# Dependências de desenvolvimento — testes e CI
+# Instalar com: pip install -r requirements.txt -r requirements-dev.txt
+
+-r requirements.txt
+
+pytest>=8.0.0

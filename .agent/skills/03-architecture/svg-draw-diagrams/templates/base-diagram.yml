@@ -1,0 +1,46 @@
+metadata:
+  title: "Your Diagram Title"
+  type: architecture  # architecture | flow | component | sequence
+                      # C4 types: c4-context | c4-container | c4-component | c4-landscape | c4-dynamic | c4-deployment
+                      # → Para C4, use o template c4-diagram.yml (elementos, boundaries, relationships)
+  orientation: horizontal  # horizontal | vertical | hierarchical
+  dimensions:
+    width: 1200
+    height: 800
+
+components:
+  - id: component-id-1
+    label: "Component Label"
+    type: service  # service | database | external | frontend
+    icon: rectangle  # rectangle | circle | cylinder | diamond | cloud | hexagon | assets/custom-icon.svg
+    color: "#4A90E2"  # Hex color
+    position: auto  # auto | [x, y]
+  
+  - id: component-id-2
+    label: "Another Component"
+    type: service
+    icon: circle
+    color: "#E94B3C"
+    position: auto
+
+connections:
+  - from: component-id-1
+    to: component-id-2
+    label: "Connection Label"  # Optional
+    style: solid  # solid | dashed | dotted | bidirectional
+    color: "#333333"  # Optional
+
+groups:
+  - id: group-id-1
+    label: "Group Label"
+    style: dashed-box  # dashed-box | rounded-box
+    color: "#CCCCCC"
+    contains:
+      - component-id-1
+      - component-id-2
+
+annotations:
+  - target: component-id-1
+    text: "Annotation text"
+    position: top  # top | bottom | left | right
+    style: callout

@@ -1,0 +1,157 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# C4 Model Diagram Template
+# Referência: https://c4model.com  |  https://c4model.com/diagrams/notation
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# Tipos disponíveis (metadata.type):
+#   c4-context    → Nível 1: System Context  (audiência: todos)
+#   c4-container  → Nível 2: Container       (audiência: arquitetos, devs, ops)
+#   c4-component  → Nível 3: Component       (audiência: arquitetos, devs)
+#   c4-landscape  → System Landscape         (visão geral multi-sistema)
+#   c4-dynamic    → Dynamic Diagram          (fluxo de interação em runtime)
+#   c4-deployment → Deployment Diagram       (topologia de deploy por ambiente)
+#
+# Tipos de elementos (elements[].kind):
+#   person          → Ator / usuário
+#   software_system → Sistema de software (interno ou externo)
+#   container       → Aplicação ou data store dentro de um software system
+#   component       → Componente interno de um container
+#   node            → Nó de infra (usado em c4-deployment)
+#
+# Paleta de cores padrão:
+#   Pessoa interna / Sistema em escopo  : fill=#1168BD  text=white
+#   Pessoa / Sistema externo            : fill=#999999  text=white
+#   Container                           : fill=#438DD5  text=white
+#   Component                           : fill=#85BBF0  text=#000000
+#   Node (deployment)                   : fill=white    stroke=#888888 dashed
+#
+# ─────────────────────────────────────────────────────────────────────────────
+
+metadata:
+  title: "Your C4 Diagram Title"
+  type: c4-container          # c4-context | c4-container | c4-component | c4-landscape | c4-dynamic | c4-deployment
+  description: >              # opcional — subtítulo descritivo
+    Brief description of what this diagram shows.
+  dimensions:
+    width: 1400
+    height: 900
+  show_legend: true           # exibe legenda automática no rodapé
+
+# ── Elementos ────────────────────────────────────────────────────────────────
+elements:
+
+  # ── Person ──
+  - id: user                  # identificador único (snake_case ou kebab-case)
+    kind: person
+    label: "User Name"
+    description: "Brief description of this person's role."
+    external: false           # false=azul (#1168BD) | true=cinza (#999999)
+    position: auto            # auto | [x, y]  — coordenadas absolutas em px
+
+  # ── Software System (em escopo) ──
+  - id: my-system
+    kind: software_system
+    label: "My Software System"
+    description: "Brief description of what this system does."
+    external: false
+
+  # ── Software System (externo) ──
+  - id: external-system
+    kind: software_system
+    label: "External System"
+    description: "An external system this system interacts with."
+    external: true
+
+  # ── Container (application) ──
+  - id: web-app
+    kind: container
+    label: "Web Application"
+    technology: "React / TypeScript"
+    description: "Delivers the SPA to the customer's browser."
+    parent: my-system         # ID do boundary que contém este elemento
+    # shape: auto             # auto | cylinder | queue-rect  (detectado pelo technology)
+    # color: "#438DD5"        # sobrescreve a cor padrão
+
+  # ── Container (database) ──
+  - id: database
+    kind: container
+    label: "Database"
+    technology: "PostgreSQL 16"
+    description: "Stores core data."
+    shape: cylinder           # forçar shape de banco independente do technology
+    parent: my-system
+
+  # ── Container (queue/message broker) ──
+  - id: message-bus
+    kind: container
+    label: "Message Bus"
+    technology: "Azure Service Bus"
+    description: "Handles async messaging between services."
+    shape: queue-rect
+    parent: my-system
+
+  # ── Component (só para c4-component) ──
+  - id: auth-component
+    kind: component
+    label: "Auth Component"
+    technology: "Spring Security"
+    description: "Handles authentication and authorisation."
+    parent: web-app           # ID do container pai
+
+  # ── Node (só para c4-deployment) ──
+  - id: prod-node
+    kind: node
+    label: "Production"
+    technology: "Azure"
+    description: "Production environment hosted in Azure."
+    children: [web-app, database]
+
+# ── Boundaries (contornos de sistema) ────────────────────────────────────────
+boundaries:
+  - id: boundary-my-system
+    label: "My Software System"
+    contains:                 # lista de IDs dos elementos dentro do boundary
+      - web-app
+      - database
+      - message-bus
+    style: dashed             # dashed | solid
+
+# ── Relacionamentos ──────────────────────────────────────────────────────────
+relationships:
+  - from: user
+    to: web-app
+    label: "Views and manages content using"
+    protocol: "HTTPS"         # aparece entre colchetes: [HTTPS]
+    style: solid              # solid | dashed  (dashed recomendado para cross-boundary)
+    bidirectional: false      # true para seta em ambas as direções
+
+  - from: web-app
+    to: database
+    label: "Reads from and writes to"
+    protocol: "JDBC"
+    style: solid
+
+  - from: web-app
+    to: message-bus
+    label: "Publishes events to"
+    protocol: "AMQP"
+    style: dashed
+
+  - from: web-app
+    to: external-system
+    label: "Gets data from"
+    protocol: "JSON/HTTPS"
+    style: dashed
+
+# ─────────────────────────────────────────────────────────────────────────────
+# REFERÊNCIA RÁPIDA — SVG Colors por kind/external
+# ─────────────────────────────────────────────────────────────────────────────
+# kind             | external | fill     | text
+# person           | false    | #1168BD  | white
+# person           | true     | #999999  | white
+# software_system  | false    | #1168BD  | white
+# software_system  | true     | #999999  | white
+# container        | —        | #438DD5  | white
+# component        | —        | #85BBF0  | #000000
+# node             | —        | white    | #444444  (stroke dashed #888888)
+# ─────────────────────────────────────────────────────────────────────────────

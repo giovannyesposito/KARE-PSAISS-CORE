@@ -1,0 +1,187 @@
+metadata:
+  title: "Hub de Pagamentos - Ecosystem View"
+  type: architecture
+  orientation: hierarchical
+  dimensions:
+    width: 1600
+    height: 1200
+
+components:
+  # Frontend Layer
+  - id: checkout-web
+    label: "Checkout Web"
+    type: frontend
+    icon: rectangle
+    color: "#61DAFB"
+    position: auto
+  
+  - id: checkout-mobile
+    label: "Checkout Mobile"
+    type: frontend
+    icon: rectangle
+    color: "#50C878"
+    position: auto
+  
+  # BFF Layer
+  - id: checkout-bff
+    label: "Checkout BFF"
+    type: service
+    icon: rectangle
+    color: "#4A90E2"
+    position: auto
+  
+  # Orchestration Layer
+  - id: payment-orchestrator
+    label: "Payment Orchestrator"
+    type: service
+    icon: rectangle
+    color: "#E94B3C"
+    position: auto
+  
+  - id: transaction-router
+    label: "Transaction Router"
+    type: service
+    icon: rectangle
+    color: "#F5A623"
+    position: auto
+  
+  # Connectors Layer
+  - id: gateway-connectors
+    label: "Gateway Connectors"
+    type: service
+    icon: rectangle
+    color: "#9013FE"
+    position: auto
+  
+  - id: pix-connector
+    label: "Pix Connector"
+    type: service
+    icon: rectangle
+    color: "#50E3C2"
+    position: auto
+  
+  # Data Layer
+  - id: instrument-vault
+    label: "Instrument Vault"
+    type: database
+    icon: cylinder
+    color: "#336791"
+    position: auto
+  
+  - id: transaction-db
+    label: "Transaction DB"
+    type: database
+    icon: cylinder
+    color: "#336791"
+    position: auto
+  
+  # External Systems
+  - id: payment-gateway
+    label: "Payment Gateway"
+    type: external
+    icon: cloud
+    color: "#CCCCCC"
+    position: auto
+  
+  - id: bacen-pix
+    label: "BACEN/Pix"
+    type: external
+    icon: cloud
+    color: "#AAAAAA"
+    position: auto
+
+connections:
+  # Frontend -> BFF
+  - from: checkout-web
+    to: checkout-bff
+    label: "GraphQL"
+    style: solid
+  
+  - from: checkout-mobile
+    to: checkout-bff
+    label: "GraphQL"
+    style: solid
+  
+  # BFF -> Orchestrator
+  - from: checkout-bff
+    to: payment-orchestrator
+    label: "REST"
+    style: solid
+  
+  # Orchestrator -> Router
+  - from: payment-orchestrator
+    to: transaction-router
+    label: "Route Payment"
+    style: solid
+  
+  # Router -> Connectors
+  - from: transaction-router
+    to: gateway-connectors
+    label: "Card Payment"
+    style: solid
+  
+  - from: transaction-router
+    to: pix-connector
+    label: "Pix Payment"
+    style: solid
+  
+  # Connectors -> External
+  - from: gateway-connectors
+    to: payment-gateway
+    label: "API Call"
+    style: dashed
+  
+  - from: pix-connector
+    to: bacen-pix
+    label: "SPI Protocol"
+    style: dashed
+  
+  # Services -> Databases
+  - from: payment-orchestrator
+    to: transaction-db
+    label: "Write"
+    style: solid
+  
+  - from: payment-orchestrator
+    to: instrument-vault
+    label: "Tokenize"
+    style: solid
+
+groups:
+  - id: frontend-layer
+    label: "Frontend Applications"
+    style: dashed-box
+    color: "#61DAFB"
+    contains:
+      - checkout-web
+      - checkout-mobile
+  
+  - id: backend-services
+    label: "Backend Microservices"
+    style: dashed-box
+    color: "#4A90E2"
+    contains:
+      - checkout-bff
+      - payment-orchestrator
+      - transaction-router
+      - gateway-connectors
+      - pix-connector
+  
+  - id: data-layer
+    label: "Data Layer"
+    style: dashed-box
+    color: "#336791"
+    contains:
+      - instrument-vault
+      - transaction-db
+
+annotations:
+  - target: payment-orchestrator
+    text: "Handles 10k req/s"
+    position: top
+    style: callout
+  
+  - target: instrument-vault
+    text: "PCI-DSS compliant"
+    position: bottom
+    style: callout

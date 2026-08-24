@@ -1,0 +1,16 @@
+# Credenciais em texto plano — nunca versionar (só os *.env.example são commitados)
+.config/.venv/*.env
+
+# NOTA: *.enc (kare_credentials.py) É intencionalmente versionável — é
+# criptografado com AES-256-GCM e a chave nunca sai de %USERPROFILE%\kare.key,
+# fora do repositório. Sem a chave, o .enc é inútil para quem clonar o repo.
+
+# Python
+__pycache__/
+*.pyc
+
+# RAG — bases geradas/acumuladas localmente, nunca versionar
+# (kare_perene_rag.db FICA versionado: é pequeno, genérico, reproduzível a
+# partir de seed/kare-universal.json — ver PRIVACY.md)
+.specify/rag/kare_history_rag.db
+.specify/rag/kare_telemetry.db

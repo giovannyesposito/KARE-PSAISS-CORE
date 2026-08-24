@@ -1,0 +1,33 @@
+{
+  "inputs": [],
+  "servers": {
+    "mcp-atlassian": {
+      "type": "stdio",
+      "command": "python",
+      "args": [
+        "${workspaceFolder}/.agent/scripts/infra/start_mcp_atlassian.py"
+      ],
+      "tools": {
+        "confluence_delete_page": false,
+        "jira_update_issue": false,
+        "jira_delete_issue": false
+      }
+    },
+    "miro-mcp": {
+      "url": "https://mcp.miro.com/",
+      "type": "http"
+    },
+    "azure": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@azure/mcp@latest",
+        "server",
+        "start",
+        "--readonly",
+        "true"
+      ]
+    }
+  }
+}

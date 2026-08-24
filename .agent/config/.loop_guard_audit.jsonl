@@ -1,0 +1,5 @@
+{"ts": "2026-05-07T17:56:34.102504+00:00", "session_id": "test-session", "tool": "Bash", "args_preview": "{'test': 'arg'}", "count": 1, "loop_triggered": false}
+{"ts": "2026-05-07T17:56:34.106036+00:00", "session_id": "test-session", "tool": "Bash", "args_preview": "{'test': 'arg'}", "count": 2, "loop_triggered": false}
+{"ts": "2026-05-07T17:56:34.108826+00:00", "session_id": "test-session", "tool": "Bash", "args_preview": "{'test': 'arg'}", "count": 3, "loop_triggered": false}
+{"ts": "2026-05-07T17:56:34.110670+00:00", "session_id": "test-session", "tool": "Bash", "args_preview": "{'test': 'arg'}", "count": 4, "loop_triggered": true}
+{"ts": "2026-05-07T17:56:34.111753+00:00", "session_id": "test-session", "tool": "Bash", "args_preview": "{'test': 'arg'}", "count": 5, "loop_triggered": true}

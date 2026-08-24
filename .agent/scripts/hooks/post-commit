@@ -1,0 +1,36 @@
+#!/bin/sh
+# .git/hooks/post-commit
+# Registra evento de commit no banco de telemetria (kare_telemetry.db).
+# Infere agente e contexto a partir da mensagem do commit.
+# Silencioso — nunca bloqueia o commit.
+#
+# Para instalá-lo: .agent/scripts/infra/install_hooks.ps1
+
+cd "$(git rev-parse --show-toplevel)"
+
+COMMIT_MSG=$(git log -1 --pretty=%s 2>/dev/null)
+COMMIT_HASH=$(git log -1 --pretty=%H 2>/dev/null | cut -c1-8)
+
+# Inferir agente pelo tipo convencional do commit
+case "$COMMIT_MSG" in
+  feat*|feature*)   AGENT="code-author" ;;
+  fix*|bugfix*)     AGENT="review-master" ;;
+  docs*|doc*)       AGENT="kare-orchestrator" ;;
+  test*)            AGENT="test-engineer" ;;
+  chore*|refactor*) AGENT="code-author" ;;
+  release*)         AGENT="delivery-observer" ;;
+  *)                AGENT="kare-orchestrator" ;;
+esac
+
+# Inferir contexto pelo escopo convencional: feat(ini-001): ... → ini-001
+CONTEXT=$(echo "$COMMIT_MSG" | grep -oE '\([a-zA-Z0-9_-]+\)' | tr -d '()' | head -1)
+if [ -z "$CONTEXT" ]; then
+  CONTEXT="global"
+fi
+
+python .agent/scripts/ai/kare_rag.py \
+  telemetry log \
+  --agent "$AGENT" \
+  --action-type "artifact_created" \
+  --artifact-ref "${CONTEXT}:${COMMIT_HASH}" \
+  > /dev/null 2>&1 || true

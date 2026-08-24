@@ -1,0 +1,30 @@
+{
+    "mcpServers": {
+        "context7": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@upstash/context7-mcp",
+                "--api-key",
+                "YOUR_API_KEY"
+            ]
+        },
+        "shadcn": {
+            "command": "npx",
+            "args": [
+                "shadcn@latest",
+                "mcp"
+            ]
+        },
+        "mcp-atlassian": {
+            "command": "python",
+            "args": [
+                "${workspaceFolder}/.agent/scripts/infra/start_mcp_atlassian.py"
+            ]
+        },
+        "miro-mcp": {
+            "url": "https://mcp.miro.com/"
+        }
+    }
+}
+

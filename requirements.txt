@@ -1,0 +1,15 @@
+# Dependências Python — scripts KARE AgileAgent
+# Instalar com: pip install -r requirements.txt
+
+# Geração de apresentações e documentos
+python-pptx>=1.0.0
+lxml>=5.0.0
+
+# Requisições HTTP (sync com RAG API, Confluence)
+requests>=2.31.0
+
+# Criptografia de credenciais (kare_credentials.py — AES-256-GCM)
+cryptography>=42.0.0
+
+# Driver Neo4j (opcional — sqlite_to_neo4j.py)
+neo4j>=5.0.0

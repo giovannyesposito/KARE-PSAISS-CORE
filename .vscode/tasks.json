@@ -1,0 +1,179 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+
+    // ─────────────────────────────────────────────────────────────────
+    //  KARE: Telemetry Session Start (automático ao abrir o workspace)
+    //  Registra início de sessão no kare_telemetry.db — background
+    // ─────────────────────────────────────────────────────────────────
+    {
+      "label": "KARE: Telemetry Session Start",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "${workspaceFolder}/.agent/scripts/ai/kare_rag.py",
+        "telemetry",
+        "session-start"
+      ],
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "presentation": {
+        "reveal": "never",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+
+    // ─────────────────────────────────────────────────────────────────
+    //  KARE: Telemetry Stats (dashboard CLI — uso por agente/período)
+    // ─────────────────────────────────────────────────────────────────
+    {
+      "label": "KARE: Telemetry Stats",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "${workspaceFolder}/.agent/scripts/ai/kare_rag.py",
+        "telemetry",
+        "stats"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+
+    // ─────────────────────────────────────────────────────────────────
+    //  KARE: Bootstrap Context Engine (primeira vez ou pós-clone)
+    //  Popula a base SQLite com os dados universais do projeto (seed)
+    // ─────────────────────────────────────────────────────────────────
+    {
+      "label": "KARE: Bootstrap Context Engine",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "${workspaceFolder}/.agent/scripts/ai/kare_rag.py",
+        "bootstrap"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+
+    // ─────────────────────────────────────────────────────────────────
+    //  KARE: Export RAG → rag-export.json (versionável no git)
+    //  Exporta o layer project (artefatos runtime dos agentes)
+    // ─────────────────────────────────────────────────────────────────
+    {
+      "label": "KARE: Export RAG Snapshot",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "${workspaceFolder}/.agent/scripts/ai/kare_rag.py",
+        "export"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+
+    // ─────────────────────────────────────────────────────────────────
+    //  KARE: Import RAG Snapshot (restauração manual pós-clone)
+    // ─────────────────────────────────────────────────────────────────
+    {
+      "label": "KARE: Import RAG Snapshot",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "${workspaceFolder}/.agent/scripts/ai/kare_rag.py",
+        "import"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+
+    // ─────────────────────────────────────────────────────────────────
+    //  KARE: Migrate — garante schema e bootstrap se base vazia
+    // ─────────────────────────────────────────────────────────────────
+    {
+      "label": "KARE: Migrate RAG",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "${workspaceFolder}/.agent/scripts/ai/kare_rag.py",
+        "migrate"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+
+    // ─────────────────────────────────────────────────────────────────
+    //  KARE: Status do Context Engine (SQLite/FTS5 standalone)
+    // ─────────────────────────────────────────────────────────────────
+    {
+      "label": "KARE: Status",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "${workspaceFolder}/.agent/scripts/ai/kare_rag.py",
+        "status"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+
+    // ─────────────────────────────────────────────────────────────────
+    //  KARE: Validar Slash Commands (descriptions no picker)
+    //  Detecta arquivos .prompt.md sem description válida
+    // ─────────────────────────────────────────────────────────────────
+    {
+      "label": "KARE: Validate Slash Commands",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "${workspaceFolder}/.agent/scripts/infra/validate_workflows.py"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+
+    // ─────────────────────────────────────────────────────────────────
+    //  KARE: Fix Slash Commands (auto-corrige descriptions sem aspas)
+    //  Após rodar: Ctrl+Shift+P → Developer: Reload Window
+    // ─────────────────────────────────────────────────────────────────
+    {
+      "label": "KARE: Fix Slash Commands (auto-fix + reload hint)",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "${workspaceFolder}/.agent/scripts/infra/validate_workflows.py",
+        "--fix"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}

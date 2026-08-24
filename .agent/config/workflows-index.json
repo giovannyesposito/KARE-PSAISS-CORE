@@ -1,0 +1,200 @@
+{
+  "workflows": [
+    {
+      "command": "/create",
+      "name": "Create",
+      "description": "Inicia fluxo completo de discovery — classifica o projeto, gera Brief + PRD e popula o backlog inicial",
+      "disclaimer": "⚠️ DISCLAIMER: Este comando executa o fluxo completo de descoberta do produto. Requer entrada inicial (canvas, documento de contexto ou PPT). A execução pode levar 10-20 minutos. Saídas: PROJECT_CONTEXT.md, PRD.md, BACKLOG.md.",
+      "usage": "/create [descrição da demanda] ou /create --ppt arquivo.pptx",
+      "outputs": ["PROJECT_CONTEXT.md", "PRD.md", "BACKLOG.md", "RAID.md"],
+      "duration": "10-20 minutos",
+      "category": "Discovery"
+    },
+    {
+      "command": "/story",
+      "name": "Story",
+      "description": "Cria ou refina itens de backlog SAFe (Epics, Capabilities, Features, User Stories e Tasks) com ACs Gherkin e DoR checklist",
+      "disclaimer": "📝 DISCLAIMER: Este comando cria stories formatadas com critérios de aceitação em Gherkin. Valida DoR (Definition of Ready) automaticamente. Não substitui planejamento de sprint. Saídas: story formatada, ACs, casos de teste, validação de risco.",
+      "usage": "/story [descrição] ou /story --epic EP-03 [descrição] ou /story --refine US-XXX",
+      "outputs": ["User Story formatada", "ACs em Gherkin", "DoR Checklist", "Casos de teste"],
+      "duration": "3-5 minutos",
+      "category": "Backlog"
+    },
+    {
+      "command": "/speckit-specify",
+      "name": "SDD Specify",
+      "description": "Formaliza uma User Story/PRD em especificação técnica (spec.md) — 1ª etapa do fluxo SDD Downstream",
+      "disclaimer": "📐 DISCLAIMER: Não escreve plano nem código — apenas formaliza requisitos, ACs e fora-de-escopo. Use @spec-writer.",
+      "usage": "/speckit-specify --story US-XX",
+      "outputs": ["_outputs/<slug>/outputs_downstream/specs/SPEC-<slug>.md"],
+      "duration": "5-10 minutos",
+      "category": "Development"
+    },
+    {
+      "command": "/plan",
+      "name": "SDD Plan",
+      "description": "Cria o plano técnico (plan.md) a partir da spec aprovada — 2ª etapa do fluxo SDD Downstream",
+      "disclaimer": "🚫 IMPORTANTE: Este comando APENAS planeja — NÃO escreve código. Requer SPEC-<slug>.md existente (rode /speckit-specify antes). Use @spec-writer.",
+      "usage": "/plan --slug <slug>",
+      "outputs": ["_outputs/<slug>/outputs_downstream/plans/PLAN-<slug>.md"],
+      "duration": "5-10 minutos",
+      "category": "Development"
+    },
+    {
+      "command": "/speckit-tasks",
+      "name": "SDD Tasks",
+      "description": "Decompõe spec.md + plan.md em tarefas pequenas e verificáveis — 3ª etapa do fluxo SDD Downstream",
+      "disclaimer": "🧩 DISCLAIMER: Não escreve código — apenas decompõe em tasks. Requer SPEC e PLAN existentes. Use @spec-writer.",
+      "usage": "/speckit-tasks --slug <slug>",
+      "outputs": ["_outputs/<slug>/outputs_downstream/tasks/TASKS-<slug>.md"],
+      "duration": "5-10 minutos",
+      "category": "Development"
+    },
+    {
+      "command": "/sprint",
+      "name": "Sprint",
+      "description": "Gera plano de sprint, sprint goal e organiza backlog para o próximo ciclo",
+      "disclaimer": "🎯 DISCLAIMER: Este comando planeja o sprint completo com priorização, validação de DoR e análise de risco. Requer backlog existente e capacidade do time (em pontos). Saídas: SPRINT_PLAN.md, Sprint Goal, distribuição de capacidade.",
+      "usage": "/sprint --capacity [pontos] ou /sprint --team-size N ou /sprint --velocity [pts/sprint]",
+      "outputs": ["SPRINT_N_PLAN.md", "Sprint Goal Canvas", "Backlog atualizado", "Riscos do sprint"],
+      "duration": "5-8 minutos",
+      "category": "Planning"
+    },
+    {
+      "command": "/implement",
+      "name": "SDD Implement",
+      "description": "Codifica as tasks (TASKS-<slug>.md) seguindo TDD — 4ª etapa do fluxo SDD Downstream",
+      "disclaimer": "💻 DISCLAIMER: Este comando escreve código real! Segue abordagem TDD (testes primeiro). Requer TASKS-<slug>.md (ou story ID válido). Gera: testes (Jest/Pytest), código-fonte, documentação técnica.",
+      "usage": "/implement --tasks TASKS-<slug>.md ou /implement --story US-XXX",
+      "outputs": ["Código-fonte", "Testes automatizados", "Documentação técnica", "PR draft"],
+      "duration": "10-30 minutos (depende da complexidade)",
+      "category": "Development"
+    },
+    {
+      "command": "/speckit-converge",
+      "name": "SDD Converge",
+      "description": "Valida a implementação contra a spec original e fecha o ciclo — 5ª e última etapa do fluxo SDD Downstream",
+      "disclaimer": "✅ DISCLAIMER: Não escreve código — valida código × spec e registra divergências. Requer /implement já executado.",
+      "usage": "/speckit-converge --slug <slug>",
+      "outputs": ["_outputs/<slug>/outputs_downstream/convergence/CONVERGE-<slug>.md"],
+      "duration": "5-10 minutos",
+      "category": "Development"
+    },
+    {
+      "command": "/review",
+      "name": "Review",
+      "description": "Executa code review automatizado — valida qualidade, cobertura de testes, documentação",
+      "disclaimer": "🔍 DISCLAIMER: Este comando revisa código existente contra checklist de qualidade KARE (testes, documentação, padrões). Não aprova automaticamente — gera relatório com sugestões. Valida INVEST, SOLID e padrões de projeto.",
+      "usage": "/review [arquivo ou PR link]",
+      "outputs": ["Relatório de review", "Sugestões de melhoria", "Score de qualidade"],
+      "duration": "3-5 minutos por arquivo",
+      "category": "Quality"
+    },
+    {
+      "command": "/test",
+      "name": "Test",
+      "description": "Gera casos de teste completos (unitários, integração, E2E) com cobertura",
+      "disclaimer": "🧪 DISCLAIMER: Este comando cria suíte de testes com múltiplos níveis (unit, integration, E2E). Calcula cobertura esperada. Requer código-fonte ou story ID. Saídas: arquivos de teste + relatório de cobertura.",
+      "usage": "/test [arquivo.ts] ou /test --story US-XXX ou /test --coverage-target 80",
+      "outputs": ["Casos de teste", "Relatório de cobertura", "Scripts de CI/CD"],
+      "duration": "5-10 minutos",
+      "category": "Quality"
+    },
+    {
+      "command": "/risk",
+      "name": "Risk",
+      "description": "Identifica riscos da sprint/release e monta plano de mitigação (RAID)",
+      "disclaimer": "⚠️ DISCLAIMER: Este comando monta análise de risco completa por slice/sprint. Utiliza matriz de impacto x probabilidade. Gera RAID (Risks, Assumptions, Issues, Dependencies) estruturado. Recomenda planos de mitigação.",
+      "usage": "/risk --sprint N ou /risk --release R ou /risk --epic EP-XX",
+      "outputs": ["RAID.md", "Matriz de risco", "Planos de mitigação"],
+      "duration": "3-5 minutos",
+      "category": "Risk"
+    },
+    {
+      "command": "/status",
+      "name": "Status",
+      "description": "Gera relatório de status da sprint/projeto com burn-down e métricas",
+      "disclaimer": "📊 DISCLAIMER: Este comando consolida status com base em dados atuais (Jira, Linear ou memória local). Requer integração MCP ativa. Saídas: relatório executivo, burn-down, velocidade, bloqueadores.",
+      "usage": "/status ou /status --sprint N ou /status --detailed",
+      "outputs": ["Relatório de status", "Burn-down chart", "Métricas de velocidade", "Bloqueadores"],
+      "duration": "1-2 minutos",
+      "category": "Reporting"
+    },
+    {
+      "command": "/debug",
+      "name": "Debug",
+      "description": "Investiga e diagnostica problemas em código, fluxos ou integrações",
+      "disclaimer": "🐛 DISCLAIMER: Este comando executa diagnóstico interativo. Examina logs, traces, dependências. Pode fazer chamadas remotas para APIs externas. Requer informações claras sobre sintomas.",
+      "usage": "/debug [descrição do problema] ou /debug --file arquivo.ts ou /debug --api endpoint",
+      "outputs": ["Diagnóstico", "Sugestões de correção", "Logs analisados"],
+      "duration": "5-15 minutos",
+      "category": "Debugging"
+    },
+    {
+      "command": "/clarificar",
+      "name": "Clarificar",
+      "description": "Levanta ambiguidades e lacunas em requirements, stories ou specs",
+      "disclaimer": "❓ DISCLAIMER: Este comando identifica gaps de requisitos e faz perguntas estruturadas para refinamento. Não executa implementação. Retorna lista de perguntas abordando critérios INVEST e DoR.",
+      "usage": "/clarificar [requisito ambíguo] ou /clarificar --story US-XXX",
+      "outputs": ["Lista de perguntas estruturadas", "Gaps identificados", "Recomendações"],
+      "duration": "2-3 minutos",
+      "category": "Refinement"
+    },
+    {
+      "command": "/analisar",
+      "name": "Analisar",
+      "description": "Valida consistência entre documentos (PRD vs Backlog vs Código vs Testes)",
+      "disclaimer": "🔗 DISCLAIMER: Este comando faz análise de coerência entre artefatos (PRD, backlog, código, testes). Identifica inconsistências e recomenda ajustes. Não modifica automaticamente.",
+      "usage": "/analisar ou /analisar --depth [shallow|medium|deep]",
+      "outputs": ["Relatório de consistência", "Inconsistências encontradas", "Recomendações"],
+      "duration": "3-5 minutos",
+      "category": "Analysis"
+    },
+    {
+      "command": "/deploy",
+      "name": "Deploy",
+      "description": "Prepara e executa deploy para staging/produção com checklist",
+      "disclaimer": "🚀 DISCLAIMER: Este comando prepara deploy E PODE executá-lo! Valida pré-requisitos (testes passando, documentação atualizada). Gera checklist de go-live. Requer confirmação explícita para produção.",
+      "usage": "/deploy --env staging ou /deploy --env production --confirm",
+      "outputs": ["Checklist de deploy", "Logs de execução", "Rollback plan"],
+      "duration": "5-20 minutos",
+      "category": "Operations"
+    },
+    {
+      "command": "/release",
+      "name": "Release",
+      "description": "Coordena release completa — versionamento, notas, tags e notificações",
+      "disclaimer": "📦 DISCLAIMER: Este comando gerencia release end-to-end: atualiza versão, gera release notes, cria tags Git, notifica stakeholders. Integra com Jira/GitHub. Requer versão alvo clara.",
+      "usage": "/release --version X.Y.Z ou /release --auto-patch",
+      "outputs": ["Release notes", "Git tags", "Notificações enviadas"],
+      "duration": "5-10 minutos",
+      "category": "Release"
+    }
+  ],
+  "slices": [
+    {
+      "id": "MVP",
+      "name": "Minimum Viable Product",
+      "color": "#FFEB3B",
+      "description": "Funcionalidades essenciais para lançamento inicial"
+    },
+    {
+      "id": "Release 1.0",
+      "name": "Release 1.0",
+      "color": "#FF9800",
+      "description": "Incrementos de valor validados pela Release Train"
+    },
+    {
+      "id": "Release 2.0",
+      "name": "Release 2.0+",
+      "color": "#2196F3",
+      "description": "Roadmap futuro e backlog de longo prazo"
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2026-04-30",
+    "totalWorkflows": 16,
+    "description": "Índice centralizado de workflows KARE com disclaimers e guias de uso"
+  }
+}

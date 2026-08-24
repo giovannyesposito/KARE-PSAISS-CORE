@@ -1,0 +1,66 @@
+{
+  "_comment": "Conhecimento universal da plataforma KARE-SPEC — layer:universal, pinned:true. Nao sofre drift. Edite aqui e execute 'python kare_rag.py bootstrap --force' para repopular. Este seed é genérico à plataforma; conhecimento específico de um contexto/cliente/programa deve ser ingerido via 'kare_rag.py ingest' com context_slug próprio, nunca aqui.",
+  "nodes": [
+    {
+      "type": "concept",
+      "title": "KARE-SPEC — Modelo Operacional",
+      "context_slug": "global",
+      "symbols": "kare-spec, modelo operacional, upstream, downstream, aprovacao previa, camadas, outputs_upstream, outputs_downstream, kare-orchestrator",
+      "content": "O KARE-SPEC é a plataforma de agentes de IA para desenvolvimento de produtos e software em projetos complexos — do discovery à entrega em produção.\n\nOpera em duas camadas complementares:\n\nCAMADA UPSTREAM: Discovery → PRD → Backlog SAFe → RAID → ADRs. Artefatos salvos em `_outputs/<slug>/outputs_upstream/`.\n\nCAMADA DOWNSTREAM: segue o modelo SDD (Spec-Driven Development, alinhado ao spec-kit) — Specify → Plan → Tasks → Implement → Converge. Artefatos salvos em `_outputs/<slug>/outputs_downstream/`.\n\nProtocolo de Aprovação Prévia (INEGOCIÁVEL): antes de gerar qualquer artefato, o `@kare-orchestrator` apresenta na janela de conversa a lista de artefatos a gerar, a estrutura de cada documento, os paths de destino e uma prévia visual de fluxos/fatiamento quando aplicável. Somente após aprovação explícita do usuário ('de acordo', 'ok', 'pode gerar') a geração é iniciada. Regra válida para todos os agentes da plataforma, tanto upstream quanto downstream."
+    },
+    {
+      "type": "concept",
+      "title": "Hierarquia SAFe — IDs KARE-SPEC",
+      "context_slug": "global",
+      "symbols": "SAFe, epic, capability, feature, enabler, user story, task, ADR, EP, CAP, FEAT, EN, US, TASK, DEC, rastreabilidade, scaled agile",
+      "content": "O KARE-SPEC usa o framework SAFe (Scaled Agile Framework) com hierarquia e IDs padronizados para rastreabilidade completa de artefatos.\n\nHierarquia de planejamento:\n  EP-XXX   → Epic: iniciativa estratégica de grande escopo (horizonte: trimestral/anual)\n  CAP-XXX  → Capability: capacidade de negócio derivada de um Epic (horizonte: PI)\n  FEAT-XXX → Feature: funcionalidade entregável derivada de uma Capability (horizonte: sprint/PI)\n  EN-XXX   → Enabler: trabalho técnico habilitador — infra, arquitetura, spikes\n  US-XXX   → User Story: unidade implementável com critérios de aceitação (ACs)\n  TASK-XXX → Task: sub-divisão técnica de uma User Story\n\nArtefatos de decisão:\n  ADR-XXX  → Architecture Decision Record: decisão técnica documentada com contexto, decisão, consequências e alternativas rejeitadas\n  DEC-XXX  → Decision: decisão de negócio/processo documentada\n\nExemplo de rastreabilidade completa:\n  EP-003 (nome do épico)\n  └─ CAP-012 (capability derivada)\n     └─ FEAT-047 (feature derivada)\n        └─ US-234 (user story com AC)\n           └─ TASK-891 (task técnica)"
+    },
+    {
+      "type": "concept",
+      "title": "SDD — Spec-Driven Development (Downstream)",
+      "context_slug": "global",
+      "symbols": "SDD, spec-driven development, spec-kit, specify, plan, tasks, implement, converge, spec.md, plan.md, tasks.md, downstream",
+      "content": "Modelo de atuação da camada Downstream do KARE-SPEC, alinhado ao spec-kit (github/spec-kit). Converte os artefatos de negócio produzidos no Upstream (PRD, Backlog, ADRs) em especificação técnica formal e código rastreável.\n\nEstágios:\n  1. Specify — formaliza a demanda em spec.md: requisitos funcionais/não-funcionais, critérios de aceite, fora-de-escopo\n  2. Plan — deriva plan.md a partir da spec: arquitetura, decisões técnicas, contratos de API/dados\n  3. Tasks — decompõe o plan em tasks.md: lista de tarefas implementáveis e testáveis, sequenciadas\n  4. Implement — executa as tasks com TDD, rastreando código e testes de volta a cada task/AC\n  5. Converge — valida que a implementação atende à spec original, registra divergências e fecha o ciclo com CONVERGE-<slug>.md\n\nArtefatos salvos em `_outputs/<slug>/outputs_downstream/{specs,plans,tasks,convergence}/`. Cada estágio tem agente(s) KARE-SPEC responsável(is) e valida o estágio anterior antes de prosseguir (nunca pula etapas)."
+    },
+    {
+      "type": "concept",
+      "title": "Convenções de Qualidade KARE-SPEC — DoD e Gates",
+      "context_slug": "global",
+      "symbols": "DoD, definition of done, DoR, definition of ready, quality gate, guardrail, lint, review, cobertura de testes, CI, sonarqube, OWASP, canvas de iniciativa, RAID",
+      "content": "Critérios mínimos de qualidade que todo entregável do KARE-SPEC deve atender antes de avançar no fluxo Upstream→Downstream.\n\nDefinition of Ready (DoR) — por iniciativa:\n- Canvas de Iniciativa ou PRD preenchido e aprovado\n- Classificação GF (Greenfield) / BF (Brownfield) definida\n- Domínio(s) de negócio impactado(s) identificados\n- Estimativa de alto nível disponível\n\nDefinition of Done (DoD) por camada:\n\nCódigo:\n- Cobertura de testes unitários >= 80% nas classes novas/alteradas\n- Zero issues críticos ou bloqueantes no lint\n- Code review aprovado por ao menos 1 par (pull request)\n- Nenhuma credencial hardcoded ou segredo exposto\n- Guardrail Gate aprovado (skill: guardrail_gate.py) quando a operação for CRITICAL/HIGH\n\nFuncional:\n- Todos os critérios de aceitação (ACs) da US verificados\n- Testes de regressão executados sem novos failures\n- Aprovação do Product Owner (ou stakeholder equivalente)\n\nDeploy:\n- Change/RFC aprovada conforme processo de governança do cliente, quando aplicável\n- Plano de rollback documentado e testado\n- Runbook de go-live atualizado\n- Monitoramento/alerta configurado para a nova funcionalidade\n\nGuardrails disponíveis no KARE-SPEC:\n- guardrail_gate.py: controle de acesso a skills sensíveis\n- sql_guard.py: validação de SQL antes de execução\n- tool_guard.py: auditoria de uso de ferramentas por agente\n- loop_guard.py: prevenção de loops infinitos em fluxos agênticos"
+    },
+    {
+      "type": "concept",
+      "title": "Governança de Mudança — CHG/GMUD e SPTI",
+      "context_slug": "global",
+      "symbols": "CHG, GMUD, SPTI, RFC, CAB, mudanca, DAS, status report, RAID, governanca, aprovacao, janela de mudanca, comite",
+      "content": "Padrões de governança de TI comumente adotados por clientes corporativos brasileiros, suportados pelo agente `@gerente-de-projetos-ti` do KARE-SPEC quando o contexto do cliente os exige.\n\nCHG/GMUD (Change Management):\n- Toda mudança em ambiente produtivo requer RFC (Request for Change) registrada na ferramenta ITSM do cliente\n- Tipos de change: Standard (pré-aprovado, baixo risco), Normal (aprovação de comitê), Emergency (fast-track para incidentes críticos)\n- CAB (Change Advisory Board): comitê que avalia e aprova changes Normal\n- Critérios de aprovação: plano de rollback documentado, testes evidenciados, impacto mapeado\n- Skill de referência: checklist-pre-chg\n\nSPTI (Solicitação de Projeto de Tecnologia da Informação):\n- Processo formal de aprovação e acompanhamento de projetos de TI, comum em estruturas de PMO corporativas\n- Fases do ciclo de vida: Iniciação → Planejamento → Execução → Encerramento\n- Entregáveis típicos: documento de abertura de projeto, status report periódico, cronograma, RAID Log\n- Skill de referência: analise-spti\n\nEstes padrões são opcionais e ativados conforme o contexto real do cliente — não fazem parte do fluxo padrão de um projeto Greenfield sem exigências corporativas de governança."
+    }
+  ],
+  "edges": [
+    {
+      "source": "KARE-SPEC — Modelo Operacional",
+      "target": "SDD — Spec-Driven Development (Downstream)",
+      "relation": "specializes_into",
+      "weight": 1.0
+    },
+    {
+      "source": "KARE-SPEC — Modelo Operacional",
+      "target": "Hierarquia SAFe — IDs KARE-SPEC",
+      "relation": "uses",
+      "weight": 0.8
+    },
+    {
+      "source": "SDD — Spec-Driven Development (Downstream)",
+      "target": "Convenções de Qualidade KARE-SPEC — DoD e Gates",
+      "relation": "gated_by",
+      "weight": 0.9
+    },
+    {
+      "source": "KARE-SPEC — Modelo Operacional",
+      "target": "Governança de Mudança — CHG/GMUD e SPTI",
+      "relation": "optionally_extends",
+      "weight": 0.5
+    }
+  ]
+}

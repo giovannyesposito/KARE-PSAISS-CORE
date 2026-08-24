@@ -1,0 +1,45 @@
+metadata:
+  title: "Simple 3-Service Architecture"
+  type: architecture
+  orientation: horizontal
+  dimensions:
+    width: 1000
+    height: 600
+
+components:
+  - id: frontend
+    label: "Frontend"
+    type: service
+    icon: rectangle
+    color: "#61DAFB"
+    position: auto
+  
+  - id: backend
+    label: "Backend API"
+    type: service
+    icon: rectangle
+    color: "#68A063"
+    position: auto
+  
+  - id: database
+    label: "PostgreSQL"
+    type: database
+    icon: cylinder
+    color: "#336791"
+    position: auto
+
+connections:
+  - from: frontend
+    to: backend
+    label: "HTTPS/REST"
+    style: solid
+    color: "#333333"
+  
+  - from: backend
+    to: database
+    label: "JDBC"
+    style: solid
+    color: "#333333"
+
+groups: []
+annotations: []
