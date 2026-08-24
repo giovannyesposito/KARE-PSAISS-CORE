@@ -1,2 +1,0 @@
-{"ts": "2026-05-07T17:55:17.534038+00:00", "agent": "delivery-observer", "tool": "Bash", "allowed": false, "risk": true, "context": null}
-{"ts": "2026-05-07T17:55:18.400608+00:00", "agent": "code-author", "tool": "Bash", "allowed": true, "risk": true, "context": null}

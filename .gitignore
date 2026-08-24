@@ -14,3 +14,8 @@ __pycache__/
 # partir de seed/kare-universal.json — ver PRIVACY.md)
 .specify/rag/kare_history_rag.db
 .specify/rag/kare_telemetry.db
+
+# Audit logs dos guards — acumulam localmente a cada execução (tool_guard,
+# loop_guard), mesma razão dos bancos RAG acima: nunca versionar
+.agent/config/.tool_guard_audit.jsonl
+.agent/config/.loop_guard_audit.jsonl

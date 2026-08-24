@@ -182,12 +182,6 @@ Scripts de outros contextos (exceto os listados na seção "Scripts Fora do Esco
 
 ---
 
-#### `gen_kare_timeline.py`
-- **Propósito:** ⚠️ Arquivo vazio — sem implementação atual
-- **Status:** Placeholder — não utilizar até implementação
-
----
-
 ### 🔴 PDF
 
 ---
