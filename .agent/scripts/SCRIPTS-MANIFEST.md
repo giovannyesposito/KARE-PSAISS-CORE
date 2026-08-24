@@ -43,8 +43,8 @@ Scripts de outros contextos (exceto os listados na seção "Scripts Fora do Esco
 - **Quando usar:** Toda vez que um agente precisar buscar contexto, ingerir artefato ou verificar o estado do RAG
 - **Comandos:**
   ```
-  python .agent/scripts/ai/kare_rag.py search "<termos>" [--limit N] [--context <slug>]
-  python .agent/scripts/ai/kare_rag.py ask "<pergunta>" [--limit N]
+  python .agent/scripts/ai/kare_rag.py search "<termos>" [--limit N] [--context <slug>] [--max-tokens N]
+  python .agent/scripts/ai/kare_rag.py ask "<pergunta>" [--limit N] [--max-tokens N]
   python .agent/scripts/ai/kare_rag.py ingest --title "..." --type artifact --context <slug> --file path/to/file.md
   python .agent/scripts/ai/kare_rag.py migrate
   python .agent/scripts/ai/kare_rag.py status
@@ -53,6 +53,7 @@ Scripts de outros contextos (exceto os listados na seção "Scripts Fora do Esco
   ```
 - **Tipos válidos para ingest:** `symbol | decision | artifact | concept | context`
 - **Diferença search vs ask:** `search` → BM25; `ask` → Hybrid (BM25 + semântico + grafo)
+- **Rerank + orçamento de tokens:** após o BM25, os resultados passam por um rerank local (boost por match exato de título/símbolo, sem modelo externo) e, se `--max-tokens` for informado, são truncados por ordem de relevância (corta os menos relevantes primeiro, nunca corta um item pela metade)
 - **Agentes que usam:** todos (via context-resolver protocol), `delivery-observer`, `code-author`, `@kare-orchestrator`
 - **Workflows que acionam:** `/create`, tasks.json (`KARE: Export/Import/Rebuild RAG`)
 - **Dependências:** `rag_auth.py` (auth JWT), Context Engine rodando em `http://localhost:8000`
@@ -329,6 +330,19 @@ Scripts de outros contextos (exceto os listados na seção "Scripts Fora do Esco
   ```
 - **Audit log:** `.agent/config/.loop_guard_audit.jsonl`
 - **Referenciado em:** `.agent/rules/orchestration.instructions.md` (seção Loop Detection), `.agent/workflows/compress-session.prompt.md`
+
+---
+
+#### `verify_loop.py`
+- **Propósito:** Loop de verificação-até-critério — chama uma função de tentativa e uma de validação repetidamente até atingir `PASS` (score ≥80, mesma escala do `@quality-guardian`) ou até `loop_guard.ActionTracker` detectar que a mesma falha está se repetendo sem progresso (escala para HITL nesse caso)
+- **Quando usar:** Ciclos de tentativa-e-validação com critério de qualidade objetivo — ex.: `@code-author` (tentativa) + `@quality-guardian` (validação) no `/implement`
+- **Uso programático:**
+  ```python
+  from verify_loop import run_until_criteria
+  outcome = run_until_criteria(attempt_fn, verify_fn, max_retries=3)
+  # outcome.passed / outcome.escalated / outcome.attempts / outcome.last_verification
+  ```
+- **Referenciado em:** `.agent/workflows/implement.prompt.md`
 
 ---
 

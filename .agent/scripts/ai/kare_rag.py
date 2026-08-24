@@ -15,8 +15,8 @@ Três bancos de dados:
 Usuário ativo: variável de ambiente KARE_USER (ex: export KARE_USER=joao.silva)
 
 Uso:
-  python kare_rag.py search "<query>" [--db perene|history|all] [--limit N]
-  python kare_rag.py ask    "<query>" [--limit N]
+  python kare_rag.py search "<query>" [--db perene|history|all] [--limit N] [--max-tokens N]
+  python kare_rag.py ask    "<query>" [--limit N] [--max-tokens N]
 
   python kare_rag.py ingest --title X --type Y (--file|--content) [--password P]
   python kare_rag.py bootstrap [--seed path.json] [--force] [--password P]
@@ -471,6 +471,51 @@ def _fts(query: str) -> str:
     return ' '.join(terms) if terms else '*'
 
 
+# ─── Rerank + orçamento de tokens (sem modelo externo, determinístico) ─────────
+
+def _estimate_tokens(text: str) -> int:
+    """Mesma heurística já usada em _telem() para tokens_in: 1 token ~= 4 chars."""
+    return len(text or "") // 4
+
+
+def _rerank(results: list, query: str) -> list:
+    """Combina o score BM25 (já retornado pelo SQL, negativo/menor=melhor) com um
+    boost por match exato de termo no título/símbolos. Sem modelo externo — roda
+    em memória, determinístico. Reordena `results` in-place por relevância desc."""
+    terms = [t.lower() for t in _fts(query).split() if t != '*']
+    for r in results:
+        boost = 0.0
+        title_l   = (r.get('title') or '').lower()
+        symbols_l = (r.get('symbols') or '').lower()
+        for t in terms:
+            if t in title_l:
+                boost += 2.0
+            if t in symbols_l:
+                boost += 1.0
+        r['_relevance'] = abs(r.get('score', 0.0)) + boost
+    results.sort(key=lambda r: r['_relevance'], reverse=True)
+    return results
+
+
+def _apply_token_budget(results: list, max_tokens: Optional[int]) -> list:
+    """Trunca a lista (já ordenada por relevância) pelo orçamento de tokens,
+    cortando os itens menos relevantes primeiro — nunca corta o texto de um
+    item pela metade. Sem orçamento definido, devolve a lista inteira."""
+    if not max_tokens:
+        return results
+    kept, used = [], 0
+    for r in results:
+        text = f"{r.get('title', '')} {r.get('content', '')} {r.get('symbols', '')}"
+        cost = _estimate_tokens(text)
+        if kept and used + cost > max_tokens:
+            break
+        kept.append(r)
+        used += cost
+        if used >= max_tokens:
+            break
+    return kept
+
+
 # ─── PERENE — comandos ─────────────────────────────────────────────────────────
 
 def cmd_search(args):
@@ -488,7 +533,9 @@ def cmd_search(args):
         results += _search_artifacts(c, args, source='history')
         c.close()
 
-    results.sort(key=lambda r: abs(r['score']), reverse=True)
+    _rerank(results, args.query)
+    results = results[:limit]
+    results = _apply_token_budget(results, getattr(args, 'max_tokens', None))
 
     _telem('query', tokens_in=len(args.query) // 4)
 
@@ -497,12 +544,12 @@ def cmd_search(args):
         return
 
     if getattr(args, 'json', False):
-        print(json.dumps(results[:limit], ensure_ascii=False, indent=2))
+        print(json.dumps(results, ensure_ascii=False, indent=2))
         return
 
     header = f"\n-- Resultados: '{args.query}' " + "-" * 40
     sys.stdout.buffer.write((header + "\n").encode("utf-8"))
-    for i, row in enumerate(results[:limit], 1):
+    for i, row in enumerate(results, 1):
         pinned  = "  [PINNED]" if row.get("pinned") else ""
         src     = f"[{row.get('_source','?')}]"
         snippet = row.get("content", "").replace("\n", " ")[:240]
@@ -1095,12 +1142,16 @@ def main():
     s.add_argument("--db",     choices=["perene", "history", "all"], default="all")
     s.add_argument("--layer",  choices=["all", "universal", "project"], default="all")
     s.add_argument("--json",   action="store_true")
+    s.add_argument("--max-tokens", type=int, default=None, dest="max_tokens",
+                   help="Orçamento de tokens (estima 1 token ~= 4 chars); corta os resultados menos relevantes primeiro")
 
     # ask
     s = sub.add_parser("ask", help="Alias de search")
     s.add_argument("query")
     s.add_argument("--limit",  type=int, default=10)
     s.add_argument("--json",   action="store_true")
+    s.add_argument("--max-tokens", type=int, default=None, dest="max_tokens",
+                   help="Orçamento de tokens (estima 1 token ~= 4 chars); corta os resultados menos relevantes primeiro")
 
     # ingest (perene — requer senha)
     s = sub.add_parser("ingest", help="Adiciona nó à base perene (requer palavra-passe)")

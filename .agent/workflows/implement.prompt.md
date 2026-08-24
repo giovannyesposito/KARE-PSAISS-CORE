@@ -35,6 +35,13 @@ aos ACs, testes BDD, e documentação de decisões técnicas.
 
 7. Se BLOCKERs no gate: corrigir antes de prosseguir
 
+   > O ciclo dos passos 5-7 (`@code-author` tenta → `@quality-guardian` valida →
+   > corrige se BLOCKER) segue o mesmo padrão de
+   > `.agent/scripts/guards/verify_loop.py::run_until_criteria()`: repete até o
+   > `quality_score` atingir PASS (≥80) ou até `loop_guard.ActionTracker`
+   > detectar que a mesma falha está se repetendo sem progresso — nesse caso,
+   > escala para revisão humana em vez de insistir indefinidamente.
+
 8. Invocar `@tech-decision-maker` se decisão técnica relevante for tomada:
    - Output: ADR novo se aplicável
 
