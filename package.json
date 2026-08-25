@@ -1,6 +1,6 @@
 {
   "name": "@dit-h/kare-spec",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "KARE-SPEC — instalador de agentes de IA para times de desenvolvimento",
   "author": "Giovanny Esposito",
   "license": "MIT",
@@ -33,7 +33,6 @@
   "type": "module",
   "main": "tools/installer/kare-cli.js",
   "bin": {
-    "kare": "tools/installer/kare-cli.js",
     "kare-spec": "tools/installer/kare-cli.js"
   },
   "files": [
